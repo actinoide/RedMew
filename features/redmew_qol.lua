@@ -38,7 +38,7 @@ end)
 -- If placed from a bp and the bp has restrictions on the chest, it takes priority.
 local restrict_chest = Token.register(function(event)
     local entity = event.entity
-    if entity and entity.valid and (entity.name == 'logistic-chest-passive-provider' or entity.type == 'container') then
+    if entity and entity.valid and (entity.name == 'passive-provider-chest' or entity.type == 'container') then
         local chest_inventory = entity.get_inventory(defines.inventory.chest)
         if #chest_inventory + 1 == chest_inventory.getbar() then
             chest_inventory.setbar(2)

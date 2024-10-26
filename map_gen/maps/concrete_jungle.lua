@@ -134,11 +134,11 @@ local entity_tiers = {
     ['substation'] = 3,
     ['laser-turret'] = 3,
     ['stack-inserter'] = 3,
-    ['logistic-chest-active-provider'] = 3,
-    ['logistic-chest-passive-provider'] = 3,
-    ['logistic-chest-buffer'] = 3,
-    ['logistic-chest-storage'] = 3,
-    ['logistic-chest-requester'] = 3
+    ['active-provider-chest'] = 3,
+    ['passive-provider-chest'] = 3,
+    ['buffer-chest'] = 3,
+    ['storage-chest'] = 3,
+    ['requester-chest'] = 3
 }
 
 --Creates rich text icons of the tiered entities

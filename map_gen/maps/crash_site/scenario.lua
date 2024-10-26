@@ -927,16 +927,16 @@ local function init(config)
         [1] = {
             market = market,
             chest = chest,
-            [4] = {entity = {name = 'logistic-chest-requester', force = 'player', callback = 'chest'}},
+            [4] = {entity = {name = 'requester-chest', force = 'player', callback = 'chest'}},
             [29] = {entity = {name = 'market', force = 'neutral', callback = 'market'}},
-            [32] = {entity = {name = 'logistic-chest-requester', force = 'player', callback = 'chest'}}
+            [32] = {entity = {name = 'requester-chest', force = 'player', callback = 'chest'}}
         },
         [2] = {
             force = 'player',
             factory = factory,
             inserter = inserter,
             chest = chest,
-            [4] = {entity = {name = 'logistic-chest-requester', force = 'player', callback = 'chest'}},
+            [4] = {entity = {name = 'requester-chest', force = 'player', callback = 'chest'}},
             [25] = {entity = {name = 'burner-inserter', direction = 2, callback = 'inserter'}},
             [27] = {entity = {name = 'electric-furnace', callback = 'factory'}},
         }

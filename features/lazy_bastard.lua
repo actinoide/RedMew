@@ -41,11 +41,11 @@ if storage.config.market.enabled then
         {price = 5, name = 'construction-robot'},
         {price = 15, name = 'logistic-robot'},
         {price = 50, name = 'roboport'},
-        {price = 5, name = 'logistic-chest-passive-provider'},
-        {price = 5, name = 'logistic-chest-active-provider'},
-        {price = 5, name = 'logistic-chest-buffer'},
-        {price = 5, name = 'logistic-chest-requester'},
-        {price = 5, name = 'logistic-chest-storage'},
+        {price = 5, name = 'passive-provider-chest'},
+        {price = 5, name = 'active-provider-chest'},
+        {price = 5, name = 'buffer-chest'},
+        {price = 5, name = 'requester-chest'},
+        {price = 5, name = 'storage-chest'},
 
     }
     local market_items = require 'resources.market_items'
@@ -121,8 +121,8 @@ Command.add('lazy-bastard-bootstrap', {
     local templates = {
         {name = 'medium-electric-pole', force = force, position = {x = pos.x - 2, y = pos.y - 1}},
         {name = 'roboport', force = force, position = {x = pos.x, y = pos.y}},
-        {name = 'logistic-chest-storage', force = force, position = {x = pos.x + 1, y = pos.y + 1}},
-        {name = 'logistic-chest-storage', force = force, position = {x = pos.x - 2, y = pos.y + 1}},
+        {name = 'storage-chest', force = force, position = {x = pos.x + 1, y = pos.y + 1}},
+        {name = 'storage-chest', force = force, position = {x = pos.x - 2, y = pos.y + 1}},
     }
 
     for i = 1, #templates do

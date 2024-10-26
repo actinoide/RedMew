@@ -156,7 +156,7 @@ end)
         end
 
         local name = effect.recipe
-        if name == 'logistic-chest-requester' then -- TODO: This doesn't prevent later tier requester chests.
+        if name == 'requester-chest' then -- TODO: This doesn't prevent later tier requester chests.
             game.forces.player.recipes[name].enabled = false
         end
 

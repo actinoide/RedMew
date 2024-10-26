@@ -50,9 +50,9 @@ RecipeLocker.lock_recipes(
         'fast-underground-belt',
         'express-underground-belt',
         'pipe-to-ground',
-        'logistic-chest-requester',
-        'logistic-chest-buffer',
-        'logistic-chest-active-provider'
+        'requester-chest',
+        'buffer-chest',
+        'active-provider-chest'
     }
 )
 
