@@ -653,7 +653,7 @@ function Public.control(config)
                 cursor_stack.label = 'Poison strike targetting remote'
                 cursor_stack.preview_icons = {{index = 1, signal = {type = 'item', name = 'poison-capsule'}}}
                 cursor_stack.tile_selection_mode = defines.deconstruction_item.tile_selection_mode.never
-                cursor_stack.entity_filters = {'sand-rock-big'}
+                cursor_stack.entity_filters = {'big-rock'}
             end
         end
 
@@ -712,7 +712,7 @@ function Public.control(config)
                 cursor_stack.label = 'Barrage targetting remote'
                 cursor_stack.preview_icons = {{index = 1, signal = {type = 'item', name = 'explosive-rocket'}}}
                 cursor_stack.tile_selection_mode = defines.deconstruction_item.tile_selection_mode.never
-                cursor_stack.entity_filters = {'sand-rock-big'}
+                cursor_stack.entity_filters = {'big-rock'}
             end
         end
         if item.type == 'spidertron' and item.name=='spidertron_planner' then

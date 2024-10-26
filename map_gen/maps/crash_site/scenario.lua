@@ -937,7 +937,7 @@ local function init(config)
             inserter = inserter,
             chest = chest,
             [4] = {entity = {name = 'requester-chest', force = 'player', callback = 'chest'}},
-            [25] = {entity = {name = 'burner-inserter', direction = 2, callback = 'inserter'}},
+            [25] = {entity = {name = 'burner-inserter', direction = 4, callback = 'inserter'}},
             [27] = {entity = {name = 'electric-furnace', callback = 'factory'}},
         }
     }
