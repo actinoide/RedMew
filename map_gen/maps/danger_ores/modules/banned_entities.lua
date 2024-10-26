@@ -36,12 +36,14 @@ return function(allowed_entities, message)
             local items = {}
             local len = 0
             local entities = RestrictEntities.get_allowed()
-            for k in pairs(entities) do
+            for k, _ in pairs(entities) do
                 local entity = prototypes.entity[k]
-                for _, v in pairs(entity.items_to_place_this) do
-                    if not items[v.name] then --- Avoid duplication for straight-rail and curved-rail, which both use rail
-                        items[v.name] = v
-                        len = len + 1
+                if entity then
+                    for _, v in pairs(entity.items_to_place_this or {}) do
+                        if not items[v.name] then --- Avoid duplication for straight-rail and curved-rail, which both use rail
+                            items[v.name] = v
+                            len = len + 1
+                        end
                     end
                 end
             end
