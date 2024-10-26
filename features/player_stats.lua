@@ -300,7 +300,7 @@ local function entity_died(event)
 end
 
 local function rocket_launched(event)
-    local entity = event.rocket
+    local entity = event.rocket_silo
 
     if not entity or not entity.valid or not entity.force == 'player' then
         return
@@ -308,12 +308,23 @@ local function rocket_launched(event)
 
     change_for_global(rockets_launched_name, 1)
 
-    local inventory = entity.get_inventory(defines.inventory.rocket_silo_rocket)
-    if not inventory or not inventory.valid then
+    local pod = event.rocket and event.rocket.cargo_pod
+    if not pod or not pod.valid then
         return
     end
 
-    local count = inventory.get_item_count('satellite')
+    local count = 0
+    local qualities = prototypes.quality
+    for k = 1, pod.get_max_inventory_index() do
+        local inventory = pod.get_inventory(k)
+        if inventory then
+            local add = inventory.get_item_count
+            for tier, _ in pairs(qualities) do
+                count = count + add({ name = 'satellite', quality = tier })
+            end
+        end
+    end
+
     if count == 0 then
         return
     end

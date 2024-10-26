@@ -62,8 +62,24 @@ return function(config)
             return
         end
 
-        local inventory = entity.get_inventory(defines.inventory.rocket_silo_rocket)
-        if not inventory or not inventory.valid then
+        local pod = entity and entity.cargo_pod
+        if not pod or not pod.valid then
+            return
+        end
+
+        local count = 0
+        local qualities = prototypes.quality
+        for k = 1, pod.get_max_inventory_index() do
+            local inventory = pod.get_inventory(k)
+            if inventory then
+                local add = inventory.get_item_count
+                for tier, _ in pairs(qualities) do
+                    count = count + add({ name = 'satellite', quality = tier })
+                end
+            end
+        end
+
+        if count == 0 then
             return
         end
 
@@ -71,7 +87,6 @@ return function(config)
         if satellite_count == 0 then
             return
         end
-
         if satellite_count == 1 then
             disable_biters()
         end
