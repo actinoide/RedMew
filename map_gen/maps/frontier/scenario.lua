@@ -260,7 +260,7 @@ local function on_player_changed_position(event)
   end
 
   local this = Public.get()
-  if player.position.x < (-this.left_boundary * 32 - this.kraken_distance) then
+  if player.physical_position.x < (-this.left_boundary * 32 - this.kraken_distance) then
     local player_name = 'a player'
     if player.character ~= nil then
       player_name = player.name
