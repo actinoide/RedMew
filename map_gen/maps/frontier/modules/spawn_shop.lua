@@ -213,7 +213,7 @@ function SpawnShop.draw_gui(player)
         table.add {
           type = 'sprite-button',
           sprite = 'item/'..item_stack.name,
-          style = satisfied and 'recipe_slot_button' or 'yellow_slot_button',
+          style = satisfied and 'slot_button' or 'yellow_slot_button',
           number = item_stack.count,
           tooltip = {'frontier.tt_shop_item_stack', {'?', {'item-name.'..item_stack.name}, {'entity-name.'..item_stack.name}, item_stack.name}, item_stack.count, (satisfied and 'green' or 'yellow') }
         }
@@ -397,7 +397,9 @@ end
 function SpawnShop.on_player_refresh(player)
   local this = Public.get()
   this.spawn_shop_funds = this.spawn_shop_funds - 1
-  this.spawn_shop_cooldown[player.index] = game.tick + 40 * SECOND
+  if not player.admin then
+    this.spawn_shop_cooldown[player.index] = game.tick + 40 * SECOND
+  end
   ScoreTracker.set_for_global(Public.scores.shop_funds.name, this.spawn_shop_funds)
   player.print('[color=orange][Bard][/color] ' .. bard_refresh_messages[math_random(#bard_refresh_messages)], { sound_path = 'utility/scenario_message', color = Color.dark_grey })
   if this.spawn_shop_funds <= 5 then

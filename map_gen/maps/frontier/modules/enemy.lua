@@ -439,7 +439,11 @@ function Enemy.stop_tracking(entity)
 end
 
 function Enemy.get_target()
-  return Table.get_random_dictionary_entry(Public.get().target_entities, false)
+  local _list = Public.get().target_entities
+  if table_size(_list) == 0 then
+    return
+  end
+  return Table.get_random_dictionary_entry(_list, false)
 end
 
 function Enemy.nuclear_explosion(position)

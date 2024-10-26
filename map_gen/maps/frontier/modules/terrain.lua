@@ -203,7 +203,7 @@ function Terrain.scale_resource_richness(surface, area)
       if resource.prototype.resource_category == 'basic-fluid' then
         resource.amount = this.ore_base_quantity * 800 * chunks
       elseif resource.prototype.resource_category == 'basic-solid' then
-        resource.amount = math_min(0.7 * resource.amount, this.ore_base_quantity * 10 + math_random(100))
+        resource.amount = math_min(1+ 0.7 * resource.amount, this.ore_base_quantity * 10 + math_random(100))
       end
     else
       if resource.prototype.resource_category == 'basic-fluid' then
@@ -449,7 +449,7 @@ function Terrain.clear_area(args)
     end
     local tiles = {}
     for _, t in pairs(surface.find_tiles_filtered{ area = area }) do
-      if t.collides_with('item_layer') then
+      if t.collides_with('item') then
         tiles[#tiles +1] = { name = 'nuclear-ground', position = t.position }
       end
     end
@@ -461,7 +461,7 @@ function Terrain.clear_area(args)
     end
     local tiles = {}
     for _, t in pairs(surface.find_tiles_filtered{ position = position, radius = args.radius }) do
-      if t.collides_with('item_layer') then
+      if t.collides_with('item') then
         tiles[#tiles +1] = { name = 'nuclear-ground', position = t.position }
       end
     end
@@ -484,7 +484,7 @@ function Terrain.clear_area(args)
     end
     local tiles = {}
     for _, t in pairs(surface.find_tiles_filtered{ area = area }) do
-      if t.collides_with('item_layer') then
+      if t.collides_with('item') then
         tiles[#tiles +1] = { name = 'nuclear-ground', position = t.position }
       end
     end
