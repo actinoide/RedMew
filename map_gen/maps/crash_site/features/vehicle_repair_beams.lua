@@ -25,8 +25,8 @@ Event.add(defines.events.on_player_driving_changed_state, function(event)
         if player ~= driver.player then -- if the player that got in the vehicle is not the driver then return
             return
         else
-            local _, useful_id = script.register_on_object_destroyed(entity)
-            car_entities[useful_id] = entity
+            script.register_on_object_destroyed(entity)
+            car_entities[entity.unit_number] = entity
         end
     end
 end)
