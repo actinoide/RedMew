@@ -35,7 +35,7 @@ SpawnShop.upgrade_button_name = Gui.uid_name()
 
 SpawnShop.upgrades = {
   { name = 'mining_productivity', packs =  100, sprite = 'technology/mining-productivity-1',                     caption = 'Mining productivity',        tooltip = {'frontier.tt_shop_mining_productivity'} },
-  { name = 'energy_damage',       packs =  100, sprite = 'technology/energy-weapons-damage-1',                   caption = 'Energy weapons damage',      tooltip = {'frontier.tt_shop_energy_damage'} },
+  { name = 'energy_damage',       packs =  100, sprite = 'technology/laser-weapons-damage-1',                   caption = 'Energy weapons damage',      tooltip = {'frontier.tt_shop_energy_damage'} },
   { name = 'projectile_damage',   packs =  100, sprite = 'technology/physical-projectile-damage-1',              caption = 'Physical projectile damage', tooltip = {'frontier.tt_shop_projectile_damage'} },
   { name = 'explosive_damage',    packs =  100, sprite = 'technology/stronger-explosives-1',                     caption = 'Explosives damage',          tooltip = {'frontier.tt_shop_explosive_damage'} },
   { name = 'flammables_damage',   packs =  100, sprite = 'technology/refined-flammables-1',                      caption = 'Flammables damage',          tooltip = {'frontier.tt_shop_flammables_damage'} },
@@ -68,8 +68,11 @@ function SpawnShop.add_render()
     sprite = script.active_mods['redmew-data'] and 'neon-lightning' or 'achievement/lazy-bastard',
     x_scale = 0.8,
     y_scale = 0.8,
-    target = e,
-    target_offset = { 0.8, -4.5 },
+    target = {
+      entity = e,
+      offset = { 0.8, -4.5 },
+      position = e.position,
+    },
     surface = e.surface,
   }
   game.forces.player.add_chart_tag(e.surface, {
@@ -480,7 +483,7 @@ function SpawnShop.upgrade_perk(id, levels)
   elseif id == 'p_crafting_speed' then
     players.manual_crafting_speed_modifier = players.manual_crafting_speed_modifier + 0.02 * levels
   elseif id == 'p_health_bonus' then
-    local HP = prototypes.entity.character.max_health
+    local HP = prototypes.entity.character.get_max_health()
     players.character_health_bonus = players.character_health_bonus + math_ceil(0.02 * HP)  * levels
   elseif id == 'p_inventory_size' then
     players.character_inventory_slots_bonus = players.character_inventory_slots_bonus + 5 * levels
