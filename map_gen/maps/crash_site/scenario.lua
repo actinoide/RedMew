@@ -971,7 +971,6 @@ Global.register_init(
         local surface = game.surfaces[1]
         surface.map_gen_settings = {width = 2, height = 2}
         surface.clear()
-        game.forces.player.set_surface_hidden('nauvis', true)
         game.forces.player.lock_space_location('nauvis')
 
         local seed = RS.get_surface().map_gen_settings.seed

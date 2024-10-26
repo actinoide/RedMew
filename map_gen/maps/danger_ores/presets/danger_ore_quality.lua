@@ -110,8 +110,6 @@ Event.on_init(function()
 
   RS.get_surface().always_day = true
   RS.get_surface().peaceful_mode = true
-
-  game.forces.player.set_surface_hidden('nauvis', true)
 end)
 
 require 'map_gen.maps.danger_ores.modules.robot_cargo_capacity'

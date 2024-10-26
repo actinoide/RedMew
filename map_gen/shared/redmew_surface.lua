@@ -187,6 +187,10 @@ local function create_redmew_surface()
         surface = game.create_surface(redmew_surface_name)
     end
 
+    for _, force in pairs(game.forces) do
+        force.set_surface_hidden(vanilla_surface_name, true)
+    end
+
     global_data.surface = surface
 
     if config.difficulty then
