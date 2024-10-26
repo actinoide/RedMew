@@ -215,6 +215,9 @@ local function init(config)
         game.surfaces.cutscene.always_day = true
         game.surfaces.cutscene.request_to_generate_chunks({0, 0}, 2)
         game.surfaces.cutscene.force_generate_chunk_requests()
+        for _, f in pairs(game.forces) do
+            f.set_surface_hidden('cutscene', true)
+        end
         cutscene_outpost()
         Cutscene.on_init()
     else
@@ -968,6 +971,8 @@ Global.register_init(
         local surface = game.surfaces[1]
         surface.map_gen_settings = {width = 2, height = 2}
         surface.clear()
+        game.forces.player.set_surface_hidden('nauvis', true)
+        game.forces.player.lock_space_location('nauvis')
 
         local seed = RS.get_surface().map_gen_settings.seed
         tbl.outpost_seed = outpost_seed or seed
