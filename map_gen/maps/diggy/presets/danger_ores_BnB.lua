@@ -92,7 +92,7 @@ local config = {
                 ['market'] = 9,
                 ['nuclear-reactor'] = 4,
                 ['stone-wall'] = 3,
-                ['sand-rock-big'] = 2,
+                ['big-rock'] = 2,
                 ['rock-big'] = 2,
                 ['huge-rock'] = 2.5,
                 ['out-of-map'] = 1,
@@ -358,7 +358,7 @@ local config = {
             -- percentage * mining productivity level gets added to mining speed
             mining_speed_productivity_multiplier = 5,
             XP = {
-                ['sand-rock-big'] = 5,
+                ['big-rock'] = 5,
                 ['rock-big'] = 5,
                 ['huge-rock'] = 10,
                 ['rocket_launch'] = 0.05, -- XP reward in percentage of total experience when a rocket launches (Diggy default: 0.05 which equals 5%)

@@ -206,7 +206,7 @@ local function on_player_mined_entity(event)
     local force = game.get_player(player_index).force
     local level = get_force_data(force).current_level
     local exp = 0
-    if name == 'sand-rock-big' then
+    if name == 'big-rock' then
         exp = sand_rock_xp + floor(level / 5)
     elseif name == 'rock-big' then
         exp = rock_big_xp + floor(level / 5)
@@ -292,7 +292,7 @@ local function on_entity_died(event)
                 floating_text_position = cause.position
             else
                 local level = get_force_data(force).current_level
-                if entity_name == 'sand-rock-big' then
+                if entity_name == 'big-rock' then
                     exp = floor((sand_rock_xp + level * 0.2) * 0.5)
                 elseif entity_name == 'rock-big' then
                     exp = floor((rock_big_xp + level * 0.2) * 0.5)
@@ -612,7 +612,7 @@ function Experience.register(cfg)
     Event.on_nth_tick(61, update_gui)
 
     -- Prevents table lookup thousands of times
-    sand_rock_xp = config.XP['sand-rock-big']
+    sand_rock_xp = config.XP['big-rock']
     rock_big_xp = config.XP['rock-big']
     rock_huge_xp = config.XP['huge-rock']
 end

@@ -723,7 +723,7 @@ function Public.control(config)
                 cursor_stack.label = "Select a group of spidertrons that belong to you! 0 selected."
                 cursor_stack.preview_icons = {{index = 1, signal = {type = 'item', name = 'spidertron'}}}
                 cursor_stack.tile_selection_mode = defines.deconstruction_item.tile_selection_mode.never
-                cursor_stack.entity_filters = {'sand-rock-big'}
+                cursor_stack.entity_filters = {'big-rock'}
         end
     end)
 

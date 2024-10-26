@@ -249,9 +249,9 @@ function Public.create_rock_cluster(pos, amount)
     entity.pos = pos
     for i = 1, amount, 1 do
         if 1 == math.random(1,3) then
-            entity.name = "sand-rock-big"
+            entity.name = "big-rock"
         else
-            entity.name = "sand-rock-big"
+            entity.name = "big-rock"
         end
         local b, e = auto_place_entity_around_target(entity, scan_radius, mode)
         if b == true then
