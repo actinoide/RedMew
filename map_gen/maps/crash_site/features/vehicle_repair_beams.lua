@@ -9,6 +9,9 @@ Global.register({car_entities = car_entities}, function(tbl)
 end)
 
 Event.add(defines.events.on_object_destroyed, function(event)
+    if not event.useful_id then
+        return
+    end
     car_entities[event.useful_id] = nil
 end)
 
