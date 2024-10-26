@@ -31,7 +31,7 @@ return {
     'item/accumulator',
     'item/construction-robot',
     'item/distractor-capsule',
-    'item/stack-inserter',
+    'item/bulk-inserter',
     'item/electric-furnace',
     'item/express-transport-belt',
     'item/express-underground-belt',

@@ -116,7 +116,7 @@ return {
     'solar-panel-equipment',
     'solid-fuel',
     'splitter',
-    'stack-inserter',
+    'bulk-inserter',
     'steam-engine',
     'steam-turbine',
     'steel-chest',
