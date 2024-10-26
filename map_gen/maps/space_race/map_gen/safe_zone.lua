@@ -17,7 +17,7 @@ landfill_water = b.translate(landfill_water, safe_zone_width/2, 0)
 
 landfill_water = b.remove_map_gen_enemies(landfill_water)
 
-landfill_water = b.change_map_gen_collision_tile(landfill_water, 'water-tile', 'landfill')
+landfill_water = b.change_map_gen_collision_tile(landfill_water, 'water_tile', 'landfill')
 
 -- landfill_water = b.change_tile(landfill_water, true, 'lab-white')
 
@@ -53,7 +53,7 @@ water = b.translate(water, -35, 0)
 start_resources = b.add(start_resources, water)
 
 start_resources = b.translate(start_resources, (safe_zone_width/2 - 60), 0)
-start_resources = b.change_map_gen_collision_tile(start_resources, 'water-tile', 'landfill')
+start_resources = b.change_map_gen_collision_tile(start_resources, 'water_tile', 'landfill')
 start_resources = b.remove_map_gen_enemies(start_resources)
 
 limited_safe_zone = b.add(start_resources, limited_safe_zone)

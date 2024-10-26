@@ -50,7 +50,7 @@ local function build_map()
 
     wave_islands = b.rotate(wave_islands, degrees(45))
 
-    local map = b.change_map_gen_collision_tile(wave_islands, 'water-tile', 'grass-1')
+    local map = b.change_map_gen_collision_tile(wave_islands, 'water_tile', 'grass-1')
     map = b.scale(map, 2)
 
     pig = b.scale(pig, 64 / 320)

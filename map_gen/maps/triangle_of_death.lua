@@ -363,6 +363,6 @@ map = b.apply_entity(map, ore_shape)
 map = b.apply_entity(map, loot)
 map = b.apply_entity(map, enemy)
 
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 
 return map

@@ -758,7 +758,7 @@ local function to_shape(blocks, part_size, on_init)
         return tile
     end
 
-    return b.change_map_gen_collision_hidden_tile(shape, 'water-tile', 'grass-1')
+    return b.change_map_gen_collision_hidden_tile(shape, 'water_tile', 'grass-1')
 end
 
 Public.to_shape = to_shape

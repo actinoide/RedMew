@@ -328,7 +328,7 @@ for _ = 1, number_blocks do
 end
 
 local map = b.grid_pattern(blocks_pattern, number_blocks, number_blocks, blocks_size, blocks_size)
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 map = b.fish(map, 0.00125)
 
 map = b.translate(map, 191, -1825)

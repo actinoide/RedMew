@@ -99,7 +99,7 @@ landfill_water = b.translate(landfill_water, -(width_2 / 2 + width_3 / 2), 0)
 
 landfill_water = b.remove_map_gen_enemies(landfill_water)
 
-landfill_water = b.change_map_gen_collision_tile(landfill_water, 'water-tile', 'landfill')
+landfill_water = b.change_map_gen_collision_tile(landfill_water, 'water_tile', 'landfill')
 
 landfill_water = b.subtract(landfill_water, b.translate(b.rectangle(256, 256), -256, 0))
 -- landfill_water = b.change_tile(landfill_water, true, 'lab-white')

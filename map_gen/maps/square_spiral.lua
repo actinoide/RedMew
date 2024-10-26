@@ -103,7 +103,7 @@ start_spiral = b.translate(start_spiral, 0, -5)
 
 map = b.choose(b.rectangle(96), start_spiral, map)
 
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 
 local sea = b.tile('water')
 sea = b.fish(sea, 0.00125)

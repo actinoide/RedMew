@@ -15,7 +15,7 @@ pic = b.decompress(pic)
 local shape = b.picture(pic)
 local map = b.single_pattern(shape, pic.width, pic.height)
 
-map = b.change_map_gen_collision_tile(map, "water-tile", "grass-1")
+map = b.change_map_gen_collision_tile(map, "water_tile", "grass-1")
 map = b.change_tile(map, false, "water")
 
 map = b.scale(map, 5, 5)

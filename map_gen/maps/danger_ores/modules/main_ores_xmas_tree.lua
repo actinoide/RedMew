@@ -155,7 +155,7 @@ return function(config)
         local main_ores_shape = b.any {raw_spawn_shape, ores_part}
         main_ores_shape = b.choose(tree, main_ores_shape, b.empty_shape)
         main_ores_shape = b.any {star, baubel_ore, main_ores_shape, sea}
-        main_ores_shape = b.change_map_gen_collision_tile(main_ores_shape, 'water-tile', 'grass-2')
+        main_ores_shape = b.change_map_gen_collision_tile(main_ores_shape, 'water_tile', 'grass-2')
 
         return main_ores_shape
     end

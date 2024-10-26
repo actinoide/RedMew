@@ -429,7 +429,7 @@ local function init(config)
 
     local start_outpost = outpost_builder:do_outpost(thin_walls, on_init)
     start_outpost = b.change_tile(start_outpost, false, true)
-    start_outpost = b.change_map_gen_collision_tile(start_outpost, 'water-tile', 'grass-1')
+    start_outpost = b.change_map_gen_collision_tile(start_outpost, 'water_tile', 'grass-1')
 
     local start_patch = b.circle(9)
     local start_iron_patch =
@@ -944,7 +944,7 @@ local function init(config)
 
     local spawn_shape = outpost_builder.to_shape(spawn, 8, on_init)
     spawn_shape = b.change_tile(spawn_shape, false, 'stone-path')
-    spawn_shape = b.change_map_gen_collision_hidden_tile(spawn_shape, 'water-tile', 'grass-1')
+    spawn_shape = b.change_map_gen_collision_hidden_tile(spawn_shape, 'water_tile', 'grass-1')
 
     map = b.choose(b.rectangle(16, 16), spawn_shape, map)
 

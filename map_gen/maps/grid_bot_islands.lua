@@ -316,7 +316,7 @@ map = b.apply_entity(map, enemy)
 
 map = b.any {map, paths, resource_islands, sea}
 
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 
 local function on_init()
     local surface = RS.get_surface()

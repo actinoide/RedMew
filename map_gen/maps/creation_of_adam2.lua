@@ -17,7 +17,7 @@ pic = b.decompress(pic)
 
 local shape = b.picture(pic)
 
---map = b.change_map_gen_collision_tile(map, "water-tile", "grass-1")
+--map = b.change_map_gen_collision_tile(map, "water_tile", "grass-1")
 
 local pattern = {
     {shape, b.flip_x(shape)},
