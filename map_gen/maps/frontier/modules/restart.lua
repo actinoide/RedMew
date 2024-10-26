@@ -553,7 +553,7 @@ function Restart.print_endgame_statistics()
     local total_ore = 0
     local ore_totals_message = '('
     for ore_name in pairs(ore_products) do
-      local count = game.forces.player.get_item_production_statistics.get_input_count(ore_name)
+      local count = game.forces.player.get_item_production_statistics(Public.surface().name).get_input_count(ore_name)
       total_ore = total_ore + count
       ore_totals_message = ore_totals_message..ore_name:gsub( '-ore', '')..': '..format_number(count, true)..', '
     end
