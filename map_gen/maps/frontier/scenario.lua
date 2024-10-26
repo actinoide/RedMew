@@ -318,10 +318,10 @@ end
 Event.add(defines.events.on_entity_damaged, on_entity_damaged)
 
 local function on_object_destroyed(event)
-  local unit_number = event.unit_number
-  --local registration_number = event.registration_number
-
-  Enemy.stop_tracking({ unit_number = unit_number })
+  if not event.useful_id then
+    return
+  end
+  Enemy.stop_tracking({ unit_number = event.useful_id })
 end
 Event.add(defines.events.on_object_destroyed, on_object_destroyed)
 
