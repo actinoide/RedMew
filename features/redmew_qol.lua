@@ -577,16 +577,16 @@ if config.loaders then
 
     local direction_to_offset_back = {
         [0] = {x = 0, y = 1.5},
-        [2] = {x = -1.5, y = 0},
-        [4] = {x = 0, y = -1.5},
-        [6] = {x = 1.5, y = 0}
+        [4] = {x = -1.5, y = 0},
+        [8] = {x = 0, y = -1.5},
+        [12] = {x = 1.5, y = 0}
     }
 
     local direction_to_offset_front = {
         [0] = {x = 0, y = -1.5},
-        [2] = {x = 1.5, y = 0},
-        [4] = {x = 0, y = 1.5},
-        [6] = {x = -1.5, y = 0}
+        [4] = {x = 1.5, y = 0},
+        [8] = {x = 0, y = 1.5},
+        [12] = {x = -1.5, y = 0}
     }
 
     local loaders = {['loader'] = true, ['fast-loader'] = true, ['express-loader'] = true}

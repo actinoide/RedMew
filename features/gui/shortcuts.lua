@@ -127,9 +127,10 @@ function Public.get_main_frame(player)
     type = 'frame',
     name = main_frame_name,
     direction = 'horizontal',
-    style = 'quick_bar_window_frame',
+    style = 'quick_bar_slot_window_frame',
   }
   main_frame.auto_center = true
+  Gui.set_style(main_frame, { minimal_width = 20 })
 
   do -- shortcuts
     local left_flow = main_frame.add { type = 'flow', direction = 'vertical' }
@@ -174,7 +175,7 @@ function Public.get_main_frame(player)
     for button_name, s in pairs(enabled_shortcuts()) do
       button = table.add {
         type = 'sprite-button',
-        style = 'quick_bar_slot_button',
+        style = 'slot_button', --quick_bar_page_button
         sprite = s.sprite,
         hovered_sprite = s.hovered_sprite,
         tooltip = s.tooltip,
@@ -200,9 +201,7 @@ function Public.get_main_frame(player)
       type = 'sprite-button',
       name = settings_button_name,
       style = 'shortcut_bar_expand_button',
-      sprite = 'utility/expand_dots_white',
-      hovered_sprite = 'utility/expand_dots',
-      clicked_sprite = 'utility/expand_dots',
+      sprite = 'utility/expand_dots',
       tooltip = {'player_shortcuts.settings_tooltip'},
       mouse_button_filter = { 'left' },
       auto_toggle = true,
