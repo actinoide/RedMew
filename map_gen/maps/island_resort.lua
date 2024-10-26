@@ -154,12 +154,12 @@ local function map(x, y, world)
 
     if tile_to_insert == 'sand-1' or tile_to_insert == 'sand-3' then
         if random(1, 200) == 1 then
-            entities[#entities + 1] = {name = 'rock-big'}
+            entities[#entities + 1] = {name = 'big-rock'}
         end
     end
     if tile_to_insert == 'grass-1' or tile_to_insert == 'grass-2' or tile_to_insert == 'grass-3' then
         if random(1, 2000) == 1 then
-            entities[#entities + 1] = {name = 'rock-big'}
+            entities[#entities + 1] = {name = 'big-rock'}
         end
     end
 

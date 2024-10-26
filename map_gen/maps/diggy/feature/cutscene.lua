@@ -182,7 +182,7 @@ local function cutscene_function(player_index, waypoint_index, params)
         local radius = 10
         local entity
         repeat
-            entity = RS.get_surface().find_entities_filtered {position = {0, 0}, radius = radius, name = 'rock-big', limit = 1}
+            entity = RS.get_surface().find_entities_filtered {position = {0, 0}, radius = radius, name = 'big-rock', limit = 1}
             if radius <= 10 then
                 radius = 0
             end

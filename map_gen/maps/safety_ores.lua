@@ -148,7 +148,7 @@ local function on_built_pumpjack(event)
 	if entity.name == 'pumpjack' then
 		for x = center_x - size, center_x + size do
 			for y = center_y - size, center_y + size do
-				if entity.surface.get_tile(x, y).collides_with("ground-tile") then
+				if entity.surface.get_tile(x, y).collides_with("ground_tile") then
 					entity.surface.create_entity({name="stone", amount=density, position={x, y}})
 				end
 			end

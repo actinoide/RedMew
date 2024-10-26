@@ -93,9 +93,9 @@ local function run_terrain_module(x, y, world)
 
         if
             math.floor(terrain_D) % 5 == 1 and math.random(1, 70) == 1 and
-                surface.can_place_entity {name = 'rock-big', position = pos}
+                surface.can_place_entity {name = 'big-rock', position = pos}
          then
-            surface.create_entity {name = 'rock-big', position = pos}
+            surface.create_entity {name = 'big-rock', position = pos}
         end
     else
         if terrain_D >= 20 then

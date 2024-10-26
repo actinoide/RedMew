@@ -184,7 +184,7 @@ local function create_collapse_template(positions, surface)
 end
 
 local function create_collapse_alert(surface, position)
-  local target = surface.create_entity({ position = position, name = 'rock-big' })
+  local target = surface.create_entity({ position = position, name = 'big-rock' })
   for _, player in pairs(game.connected_players) do
     player.add_custom_alert(target, collapse_alert, { 'diggy.cave_collapse' }, true)
   end

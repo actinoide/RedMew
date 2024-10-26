@@ -216,7 +216,7 @@ return function(_, _, world) -- luacheck: ignore 561
     end
 
     if noise_trees < -0.5 and (tile_to_insert == 'sand-3' or tile_to_insert == 'sand-1') and random(15) == 1 then
-        insert(entities, {name = 'rock-big'})
+        insert(entities, {name = 'big-rock'})
     end
 
     local noise_water_1 = perlin.noise(((world.x + seed) / 200), ((world.y + seed) / 200), 0)

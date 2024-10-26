@@ -243,7 +243,7 @@ function Terrain.rich_rocks(surface, area)
   end
 
   for _ = 1, this.rock_richness do
-    local rock_name = math_random() < 0.4 and 'huge-rock' or 'rock-big'
+    local rock_name = math_random() < 0.4 and 'huge-rock' or 'big-rock'
     place_rock(rock_name)
   end
 end
@@ -400,7 +400,7 @@ function Terrain.reshape_land(surface, area)
     -- Worm oil
     if no_rocks < 0.029 and no_rocks > -0.245 then
       if small_caves > 0.081 then
-        return { name = x < right_boundary and'brown-refined-concrete' or 'black-refined-concrete', position = p }
+        return { name = x < right_boundary and 'brown-refined-concrete' or 'black-refined-concrete', position = p }
       end
     end
 
@@ -444,24 +444,24 @@ function Terrain.clear_area(args)
         y = position.y + cb.right_bottom.y,
       }
     }
-    for _, e in pairs(surface.find_entities_filtered{ area = area, collision_mask = {'player-layer', 'object-layer'}}) do
+    for _, e in pairs(surface.find_entities_filtered{ area = area, collision_mask = {'player', 'object'}}) do
       e.destroy()
     end
     local tiles = {}
     for _, t in pairs(surface.find_tiles_filtered{ area = area }) do
-      if t.collides_with('item-layer') then
+      if t.collides_with('item_layer') then
         tiles[#tiles +1] = { name = 'nuclear-ground', position = t.position }
       end
     end
     surface.set_tiles(tiles, true)
     return true
   elseif args.radius then
-    for _, e in pairs(surface.find_entities_filtered{ position = position, radius = args.radius, collision_mask = {'player-layer', 'object-layer'}}) do
+    for _, e in pairs(surface.find_entities_filtered{ position = position, radius = args.radius, collision_mask = {'player', 'object'}}) do
       e.destroy()
     end
     local tiles = {}
     for _, t in pairs(surface.find_tiles_filtered{ position = position, radius = args.radius }) do
-      if t.collides_with('item-layer') then
+      if t.collides_with('item_layer') then
         tiles[#tiles +1] = { name = 'nuclear-ground', position = t.position }
       end
     end
@@ -479,12 +479,12 @@ function Terrain.clear_area(args)
         y = position.y + size,
       }
     }
-    for _, e in pairs(surface.find_entities_filtered{ area = area, collision_mask = {'player-layer', 'object-layer'}}) do
+    for _, e in pairs(surface.find_entities_filtered{ area = area, collision_mask = {'player', 'object'}}) do
       e.destroy()
     end
     local tiles = {}
     for _, t in pairs(surface.find_tiles_filtered{ area = area }) do
-      if t.collides_with('item-layer') then
+      if t.collides_with('item_layer') then
         tiles[#tiles +1] = { name = 'nuclear-ground', position = t.position }
       end
     end

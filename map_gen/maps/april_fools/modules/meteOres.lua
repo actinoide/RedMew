@@ -70,7 +70,7 @@ local function drop_meteors()
     local map_position = {x = chunk_position.x * 32 + rand_x, y = chunk_position.y * 32 + rand_y}
 
     -- Spawn Rock
-    if surface.get_tile(map_position).collides_with('ground-tile') then
+    if surface.get_tile(map_position).collides_with('ground_tile') then
       surface.create_entity({name = 'huge-rock', position = map_position, move_stuck_players = true,})
       surface.create_entity({name = 'massive-explosion', position = map_position,})
     end
@@ -113,7 +113,7 @@ local function drop_meteors()
           if b < a then
             ore_amount = math.random(b * ORE_DENSITY - b * (ORE_DENSITY - 8), b * ORE_DENSITY + b * (ORE_DENSITY - 8))
           end
-          if surface.get_tile(map_position.x + x, map_position.y + y).collides_with('ground-tile') then
+          if surface.get_tile(map_position.x + x, map_position.y + y).collides_with('ground_tile') then
             if ores == 'mixed' then
               ore_type = BASIC_ORES[math.random(1, #BASIC_ORES)]
             end
@@ -130,7 +130,7 @@ local function drop_meteors()
       local biter_position = {
         map_position.x + math.random(-METEOR_SIZE, METEOR_SIZE),
         map_position.y + math.random(-METEOR_SIZE, METEOR_SIZE)}
-      if surface.get_tile(biter_position).collides_with('ground-tile') then
+      if surface.get_tile(biter_position).collides_with('ground_tile') then
         surface.create_entity{
           name = biters[unit_index],
           position = biter_position,

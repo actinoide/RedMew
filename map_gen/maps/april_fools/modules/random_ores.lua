@@ -64,7 +64,7 @@ local function on_built_miner(event)
       if rand >= MAX_RAND*(1 - extra_percent) then
         local rand_ore = table.get_random_weighted(ORES)
 
-        if (rand_ore ~= ore.name) and surface.get_tile(ore.position.x, ore.position.y).collides_with('ground-tile') then
+        if (rand_ore ~= ore.name) and surface.get_tile(ore.position.x, ore.position.y).collides_with('ground_tile') then
           local amount = ore.amount
           local ore_position = ore.position
           ore.destroy()

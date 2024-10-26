@@ -141,7 +141,7 @@ local function create_collapse_template(positions, surface)
 end
 
 local function create_collapse_alert(surface, position)
-    local target = surface.create_entity({position = position, name = 'rock-big'})
+    local target = surface.create_entity({position = position, name = 'big-rock'})
     for _, player in pairs(game.connected_players) do
         player.add_custom_alert(target, collapse_alert, {'diggy.cave_collapse'}, true)
     end
@@ -215,7 +215,7 @@ local function on_collapse_triggered(event)
 
     local x_t = new_tile_map[x]
     if x_t and x_t[y] then
-        template_insert(surface, {}, {{position = position, name = 'rock-big'}})
+        template_insert(surface, {}, {{position = position, name = 'big-rock'}})
         return
     end
     spawn_collapse_text(surface, position)

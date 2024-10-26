@@ -127,7 +127,7 @@ start_circle = b.translate(start_circle, 0, -32)
 
 map = b.any{start_circle, map}
 
-map = b.change_map_gen_collision_tile(map, "water-tile", "grass-1")
+map = b.change_map_gen_collision_tile(map, "water_tile", "grass-1")
 
 map = b.rotate(map, degrees(90))
 map = b.scale(map, 3, 3)

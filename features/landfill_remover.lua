@@ -22,7 +22,7 @@ local floor = math.floor
 local ceil = math.ceil
 local fast_remove = table.fast_remove
 
-local collision_mask = {'floor-layer', 'object-layer', 'resource-layer'}
+local collision_mask = {'floor', 'object', 'resource'}
 local whitelist = defines.deconstruction_item.tile_filter_mode.whitelist
 local entity_whitelist = defines.deconstruction_item.entity_filter_mode.whitelist
 

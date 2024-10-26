@@ -91,7 +91,7 @@ local function sprinkle(_, _, world)
     }
 end
 
-local rock_names = {'rock-big', 'huge-rock', 'big-rock'}
+local rock_names = {'big-rock', 'huge-rock', 'big-rock'}
 local function rocks_func()
     local rock = rock_names[math.random(#rock_names)]
     return {name = rock}
