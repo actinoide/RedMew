@@ -23,12 +23,15 @@ local function register_tank(entity)
     if entity.name ~= 'tank' then
         return
     end
-    tank_entities[entity.unit_number] = entity
     script.register_on_object_destroyed(entity)
+    tank_entities[entity.unit_number] = entity
 end
 
 Event.add(defines.events.on_object_destroyed, function(event)
-    tank_entities[event.unit_number] = nil
+    if not event.useful_id then
+        return
+    end
+    tank_entities[event.useful_id] = nil
 end)
 
 Event.add(defines.events.on_robot_built_entity, function(event)
