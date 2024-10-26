@@ -40,7 +40,6 @@ Event.add(defines.events.on_player_deconstructed_area, function(event)
 
     -- check if the player has given the decon planner an icon. This is how  we will determine  their intention
     if not cursor_stack.preview_icons or not cursor_stack.preview_icons[1] or not cursor_stack.preview_icons[1].signal.name then
-        log(cursor_stack.preview_icons[1].signal.name)
         return
     end
 

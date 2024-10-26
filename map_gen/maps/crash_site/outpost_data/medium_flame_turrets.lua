@@ -75,7 +75,7 @@ return ob.make_walls{
         [25] = {entity = {name = 'stone-wall'}},
         [26] = {tile = 'hazard-concrete-left'},
         [27] = {
-            entity = {name = 'flamethrower-turret', callback = 'flame_turret', direction = 6, offset = 2},
+            entity = {name = 'flamethrower-turret', callback = 'flame_turret', direction = 12, offset = 2},
             tile = 'hazard-concrete-left'
         },
         [28] = {tile = 'hazard-concrete-left'},
@@ -102,7 +102,7 @@ return ob.make_walls{
         [9] = {tile = 'hazard-concrete-left'},
         [10] = {tile = 'concrete'},
         [11] = {
-            entity = {name = 'flamethrower-turret', callback = 'flame_turret', direction = 6, offset = 2},
+            entity = {name = 'flamethrower-turret', callback = 'flame_turret', direction = 12, offset = 2},
             tile = 'concrete'
         },
         [12] = {tile = 'concrete'},
