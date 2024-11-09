@@ -84,7 +84,7 @@ local centre =b.circle(18)
 --local centre = b.rectangle(5,5)
 --local centre = b.scale(chamfer, 0.08,0.08)
 map = b.if_else(centre, map)
-centre = b.change_map_gen_collision_tile(centre, 'ground-tile', 'stone-path')
+centre = b.change_map_gen_collision_tile(centre, 'ground_tile', 'stone-path')
 -- the coordinates at which the standard market and spawn  will be created
 local startx = 0
 local starty = 0

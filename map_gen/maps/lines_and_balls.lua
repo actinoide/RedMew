@@ -191,7 +191,7 @@ local function build_map()
     local start_coal = b.resource(small_circle, ores[4].resource, constant(700))
     local start_segmented = b.segment_pattern({start_iron, start_copper, start_stone, start_coal})
 
-    local start_shape = b.change_map_gen_collision_tile(small_circle, 'water-tile', 'grass-1')
+    local start_shape = b.change_map_gen_collision_tile(small_circle, 'water_tile', 'grass-1')
     start_shape = b.apply_entity(start_shape, start_segmented)
     start_shape = b.translate(start_shape, 0, 48)
     start_shape = b.any {start_shape, b.full_shape}

@@ -34,7 +34,7 @@ RestrictEntities.add_banned(
         'inserter',
         'long-handed-inserter',
         'fast-inserter',
-        'stack-inserter',
+        'bulk-inserter',
         'electric-mining-drill'
     }
 )
@@ -52,7 +52,7 @@ Event.add(
 
         for _, e in pairs(effects) do
             local t = e.type
-            if t == 'stack-inserter-capacity-bonus' then
+            if t == 'bulk-inserter-capacity-bonus' then
                 f.inserter_stack_size_bonus = f.inserter_stack_size_bonus + e.modifier
             end
         end

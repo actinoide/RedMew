@@ -316,7 +316,7 @@ map = b.apply_entity(map, enemy)
 
 map = b.any {map, paths, resource_islands, sea}
 
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 
 local function on_init()
     local surface = RS.get_surface()
@@ -373,10 +373,10 @@ local function on_init()
     Retailer.set_item('items', {price = 10, name = 'construction-robot'})
     Retailer.set_item('items', {price = 2, name = 'logistic-robot'})
     Retailer.set_item('items', {price = 75, name = 'roboport'})
-    Retailer.set_item('items', {price = 50, name = 'logistic-chest-active-provider'})
-    Retailer.set_item('items', {price = 50, name = 'logistic-chest-passive-provider'})
-    Retailer.set_item('items', {price = 50, name = 'logistic-chest-requester'})
-    Retailer.set_item('items', {price = 50, name = 'logistic-chest-storage'})
+    Retailer.set_item('items', {price = 50, name = 'active-provider-chest'})
+    Retailer.set_item('items', {price = 50, name = 'passive-provider-chest'})
+    Retailer.set_item('items', {price = 50, name = 'requester-chest'})
+    Retailer.set_item('items', {price = 50, name = 'storage-chest'})
     Retailer.set_item('items', {price = 6, name = 'big-electric-pole'})
     Retailer.set_item('items', {price = 3, name = 'medium-electric-pole'})
     Retailer.set_item('items', {price = 50, name = 'substation'})

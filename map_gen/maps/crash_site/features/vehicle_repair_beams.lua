@@ -9,7 +9,10 @@ Global.register({car_entities = car_entities}, function(tbl)
 end)
 
 Event.add(defines.events.on_object_destroyed, function(event)
-    car_entities[event.unit_number] = nil
+    if not event.useful_id then
+        return
+    end
+    car_entities[event.useful_id] = nil
 end)
 
 Event.add(defines.events.on_player_driving_changed_state, function(event)
@@ -25,8 +28,8 @@ Event.add(defines.events.on_player_driving_changed_state, function(event)
         if player ~= driver.player then -- if the player that got in the vehicle is not the driver then return
             return
         else
-            car_entities[entity.unit_number] = entity
             script.register_on_object_destroyed(entity)
+            car_entities[entity.unit_number] = entity
         end
     end
 end)

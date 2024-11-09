@@ -194,7 +194,7 @@ sea = b.fish(sea, 0.0025)
 
 map = b.any {map, paths, sea}
 
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 map = b.rotate(map,degrees(45))
 
 

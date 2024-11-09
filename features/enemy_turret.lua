@@ -6,7 +6,6 @@ local register_on_object_destroyed = script.register_on_object_destroyed
 
 local Public = {}
 local turrets_map = {}
-local register_map = {}
 local primitives = { index = nil }
 local Artillery = {
   enabled = true,
@@ -47,13 +46,11 @@ local Artillery = {
 Global.register(
   {
     turrets_map = turrets_map,
-    register_map = register_map,
     primitives = primitives,
     artillery = Artillery,
   },
   function(tbl)
     turrets_map = tbl.turrets_map
-    register_map = tbl.register_map
     primitives = tbl.primitives
     Artillery = tbl.artillery
 end)
@@ -87,7 +84,7 @@ function Public.register(entity, refill_name)
     return
   end
 
-  local destroy_id = register_on_object_destroyed(entity)
+  register_on_object_destroyed(entity)
   local unit_id = entity.unit_number
 
   local data = {
@@ -95,7 +92,6 @@ function Public.register(entity, refill_name)
     refill = refill_name,
     is_fluid = is_fluid,
     is_artillery = is_artillery,
-    destroy_id = destroy_id
   }
 
   if data.is_artillery then
@@ -113,24 +109,19 @@ function Public.register(entity, refill_name)
     }
   end
 
-  register_map[destroy_id] = unit_id
   turrets_map[unit_id] = data
 end
 
 function Public.remove(entity)
-  local unit_id = entity.unit_number
-  local destroy_id = turrets_map[unit_id].destroy_id
-
-  register_map[destroy_id] = nil
-  turrets_map[unit_id] = nil
+  if not entity.unit_number then
+    return
+  end
+  turrets_map[entity.unit_number] = nil
 end
 
 function Public.reset()
   for k, _ in pairs(turrets_map) do
     turrets_map[k] = nil
-  end
-  for k, _ in pairs(register_map) do
-    register_map[k] = nil
   end
 end
 
@@ -194,11 +185,10 @@ local function simulate_automatic_artillery(data)
 end
 
 local function on_object_destroyed(event)
-  local destroy_id = event.registration_number
-  local unit_id = event.unit_number
-
-  register_map[destroy_id] = nil
-  turrets_map[unit_id] = nil
+  if not event.useful_id then
+    return
+  end
+  turrets_map[event.useful_id] = nil
 end
 Event.add(defines.events.on_object_destroyed, on_object_destroyed)
 

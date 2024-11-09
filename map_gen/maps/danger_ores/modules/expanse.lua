@@ -257,7 +257,7 @@ return function(config)
   end
 
   local function process_chest(entity, budget)
-    if entity.name ~= 'logistic-chest-requester' then
+    if entity.name ~= 'requester-chest' then
       return
     end
     if not chest_data[entity.unit_number] then
@@ -363,7 +363,7 @@ return function(config)
     local chests = {}
     for _, position in pairs(positions) do
       if is_container_position_valid(position) then
-        local e = surface.create_entity({ name = 'logistic-chest-requester', position = position, force = 'neutral' })
+        local e = surface.create_entity({ name = 'requester-chest', position = position, force = 'neutral' })
         e.destructible = false
         e.minable = false
         table.insert(chests, e)
@@ -381,7 +381,7 @@ return function(config)
     end
 
     -- first, remove all adjacent chests & destroy those
-    local old_chests = surface.find_entities_filtered{name = 'logistic-chest-requester', force = 'neutral', area = {
+    local old_chests = surface.find_entities_filtered{name = 'requester-chest', force = 'neutral', area = {
       left_top = {
         x = left_top.x-1,
         y = left_top.y-1,
@@ -455,7 +455,7 @@ return function(config)
 
   local delay_cost = Token.register(function()
     local rs = RS.get_surface()
-    local chests = rs.find_entities_filtered{name = 'logistic-chest-requester', force = 'neutral'}
+    local chests = rs.find_entities_filtered{name = 'requester-chest', force = 'neutral'}
     for _, chest in pairs(chests) do
       if chest_data[chest.unit_number] then
         remove_old_renders(chest_data[chest.unit_number])

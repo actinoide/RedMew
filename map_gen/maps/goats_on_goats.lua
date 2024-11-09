@@ -114,6 +114,6 @@ local pattern =
 }
 
 local map = b.grid_pattern(pattern, 2, 2, pic.width, pic.height + t - 105)
-map = b.change_map_gen_collision_tile(map,"water-tile", "water-green")
+map = b.change_map_gen_collision_tile(map, "water_tile", "water-green")
 
 return map

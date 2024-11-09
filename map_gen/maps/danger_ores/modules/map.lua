@@ -22,7 +22,7 @@ local function spawn_builder(config)
 
     local start = b.if_else(water, spawn_circle)
     start = b.change_tile(start, true, spawn_tile)
-    return b.change_map_gen_collision_tile(start, 'water-tile', spawn_tile)
+    return b.change_map_gen_collision_tile(start, 'water_tile', spawn_tile)
 end
 
 local function tile_builder_factory(config)

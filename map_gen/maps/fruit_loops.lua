@@ -91,7 +91,7 @@ local function sprinkle(_, _, world)
     }
 end
 
-local rock_names = {'rock-big', 'huge-rock', 'sand-rock-big'}
+local rock_names = {'rock-big', 'huge-rock', 'big-rock'}
 local function rocks_func()
     local rock = rock_names[math.random(#rock_names)]
     return {name = rock}
@@ -230,7 +230,7 @@ end
 
 local map = b.grid_pattern_full_overlap(pattern, p_cols, p_rows, 128, 128)
 
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 
 local sea = b.change_tile(b.full_shape, true, 'water')
 sea = b.fish(sea, 0.00125)

@@ -302,7 +302,7 @@ local map = b.if_else(shape_islands, shape2_islands)
 
 map = b.choose(mediumn_dot, start, map)
 
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 
 map = b.fish(map, 0.0025)
 

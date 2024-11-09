@@ -78,7 +78,7 @@ return ob.make_walls{
         },
         [16] = {tile = 'refined-hazard-concrete-left'},
         [17] = {
-            entity = {name = 'laser-turret', callback = 'turret', direction = 2, offset = 3},
+            entity = {name = 'laser-turret', callback = 'turret', direction = 4, offset = 3},
             tile = 'refined-hazard-concrete-left'
         },
         [18] = {tile = 'refined-hazard-concrete-left'},
@@ -91,7 +91,7 @@ return ob.make_walls{
         [25] = {entity = {name = 'stone-wall'}},
         [26] = {entity = {name = 'stone-wall'}},
         [27] = {
-            entity = {name = 'laser-turret', callback = 'turret', direction = 2, offset = 3},
+            entity = {name = 'laser-turret', callback = 'turret', direction = 4, offset = 3},
             tile = 'refined-hazard-concrete-left'
         },
         [28] = {tile = 'refined-hazard-concrete-left'},
@@ -109,12 +109,12 @@ return ob.make_walls{
         [1] = {entity = {name = 'stone-wall'}},
         [2] = {entity = {name = 'stone-wall'}},
         [3] = {
-            entity = {name = 'laser-turret', callback = 'turret', direction = 2, offset = 3},
+            entity = {name = 'laser-turret', callback = 'turret', direction = 4, offset = 3},
             tile = 'refined-hazard-concrete-left'
         },
         [4] = {tile = 'refined-hazard-concrete-left'},
         [5] = {
-            entity = {name = 'laser-turret', callback = 'turret', direction = 2, offset = 3},
+            entity = {name = 'laser-turret', callback = 'turret', direction = 4, offset = 3},
             tile = 'refined-hazard-concrete-left'
         },
         [6] = {tile = 'refined-hazard-concrete-left'},
@@ -125,17 +125,17 @@ return ob.make_walls{
         [11] = {tile = 'refined-hazard-concrete-left'},
         [12] = {tile = 'refined-hazard-concrete-left'},
         [13] = {
-            entity = {name = 'laser-turret', callback = 'turret', direction = 2, offset = 3},
+            entity = {name = 'laser-turret', callback = 'turret', direction = 4, offset = 3},
             tile = 'refined-hazard-concrete-left'
         },
         [14] = {tile = 'refined-hazard-concrete-left'},
         [15] = {
-            entity = {name = 'laser-turret', callback = 'turret', direction = 2, offset = 3},
+            entity = {name = 'laser-turret', callback = 'turret', direction = 4, offset = 3},
             tile = 'refined-hazard-concrete-left'
         },
         [16] = {tile = 'refined-hazard-concrete-left'},
         [17] = {
-            entity = {name = 'laser-turret', callback = 'turret', direction = 2, offset = 3},
+            entity = {name = 'laser-turret', callback = 'turret', direction = 4, offset = 3},
             tile = 'refined-hazard-concrete-left'
         },
         [18] = {tile = 'refined-hazard-concrete-left'},
@@ -146,12 +146,12 @@ return ob.make_walls{
         [23] = {tile = 'refined-hazard-concrete-left'},
         [24] = {tile = 'refined-hazard-concrete-left'},
         [25] = {
-            entity = {name = 'laser-turret', callback = 'turret', direction = 2, offset = 3},
+            entity = {name = 'laser-turret', callback = 'turret', direction = 4, offset = 3},
             tile = 'refined-hazard-concrete-left'
         },
         [26] = {tile = 'refined-hazard-concrete-left'},
         [27] = {
-            entity = {name = 'laser-turret', callback = 'turret', direction = 2, offset = 3},
+            entity = {name = 'laser-turret', callback = 'turret', direction = 4, offset = 3},
             tile = 'refined-hazard-concrete-left'
         },
         [28] = {tile = 'refined-hazard-concrete-left'},

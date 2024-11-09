@@ -16,6 +16,6 @@ local pattern =
 local map = b.grid_pattern(pattern, 2, 2, pic.width * scale_factor, pic.height * scale_factor)
 map = b.translate(map, 128 * scale_factor, 26 * scale_factor)
 
-map = b.change_map_gen_collision_tile(map, "water-tile", "grass-1")
+map = b.change_map_gen_collision_tile(map, "water_tile", "grass-1")
 
 return map

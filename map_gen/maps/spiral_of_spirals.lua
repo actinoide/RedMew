@@ -183,7 +183,7 @@ end
 map = b.apply_entity(map, resources_shape)
 map = b.apply_entity(map, worms)
 
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 map = b.change_tile(map, false, 'water')
 
 map = b.fish(map, 0.0025)

@@ -78,12 +78,12 @@ local coal = b.resource(b.circle(6), 'coal', value(600, 0.6))
 local uranium = b.resource(b.circle(4), 'uranium-ore', value(400, 1))
 local oil = b.resource(b.throttle_world_xy(b.circle(6), 1, 4, 1, 4), 'crude-oil', value(100000, 50))
 
---[[ local iron_ball = b.change_map_gen_collision_tile(b.apply_entity(ball, iron), 'water-tile', 'grass-1')
-local copper_ball = b.change_map_gen_collision_tile(b.apply_entity(ball, copper), 'water-tile', 'grass-1')
-local stone_ball = b.change_map_gen_collision_tile(b.apply_entity(ball, stone), 'water-tile', 'grass-1')
-local coal_ball = b.change_map_gen_collision_tile(b.apply_entity(ball, coal), 'water-tile', 'grass-1')
-local uranium_ball = b.change_map_gen_collision_tile(b.apply_entity(ball, uranium), 'water-tile', 'grass-1')
-local oil_ball = b.change_map_gen_collision_tile(b.apply_entity(ball, oil), 'water-tile', 'grass-1') ]]
+--[[ local iron_ball = b.change_map_gen_collision_tile(b.apply_entity(ball, iron), 'water_tile', 'grass-1')
+local copper_ball = b.change_map_gen_collision_tile(b.apply_entity(ball, copper), 'water_tile', 'grass-1')
+local stone_ball = b.change_map_gen_collision_tile(b.apply_entity(ball, stone), 'water_tile', 'grass-1')
+local coal_ball = b.change_map_gen_collision_tile(b.apply_entity(ball, coal), 'water_tile', 'grass-1')
+local uranium_ball = b.change_map_gen_collision_tile(b.apply_entity(ball, uranium), 'water_tile', 'grass-1')
+local oil_ball = b.change_map_gen_collision_tile(b.apply_entity(ball, oil), 'water_tile', 'grass-1') ]]
 local iron_ball = b.apply_entity(ball, iron)
 local copper_ball = b.apply_entity(ball, copper)
 local stone_ball = b.apply_entity(ball, stone)
@@ -177,7 +177,7 @@ end
 map = b.translate(map, 0, -19669)
 map = b.scale(map, 2, 2)
 
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 map = b.change_tile(map, false, 'water')
 map = b.fish(map, 0.0025)
 

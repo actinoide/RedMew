@@ -7,7 +7,7 @@ local loot = {
     {stack = {name = 'express-transport-belt', count = 100, distance_factor = 1 / 8}, weight = 5},
     {stack = {name = 'express-underground-belt', count = 20, distance_factor = 1 / 16}, weight = 5},
     {stack = {name = 'express-splitter', count = 10, distance_factor = 1 / 32}, weight = 5},
-    {stack = {name = 'stack-inserter', count = 50, distance_factor = 1 / 32}, weight = 5},
+    {stack = {name = 'bulk-inserter', count = 50, distance_factor = 1 / 32}, weight = 5},
     {stack = {name = 'assembling-machine-3', count = 25, distance_factor = 1 / 32}, weight = 2}
 }
 
@@ -44,8 +44,8 @@ local factory_loot = {
     },
     {
         stack = {
-            recipe = 'stack-inserter',
-            output = {item = 'stack-inserter', min_rate = 1 / 2 / 60, distance_factor = 1 / 2 / 60 / 512}
+            recipe = 'bulk-inserter',
+            output = {item = 'bulk-inserter', min_rate = 1 / 2 / 60, distance_factor = 1 / 2 / 60 / 512}
         },
         weight = 5
     },

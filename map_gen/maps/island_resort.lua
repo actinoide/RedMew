@@ -141,9 +141,9 @@ local function map(x, y, world)
             end
             if tile_to_insert == 'red-desert-0' then
                 if random(1, 3) == 1 then
-                    tree = 'sand-rock-big'
+                    tree = 'big-rock'
                 else
-                    tree = 'sand-rock-big'
+                    tree = 'big-rock'
                 end
             end
             if random(1, 8) == 1 then

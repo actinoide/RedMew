@@ -176,7 +176,7 @@ map = b.scale(map, scale_factor, scale_factor)
 -- make starting area
 local start_region = b.rectangle(block_length * scale_factor, block_width * scale_factor)
 map = b.subtract(map, start_region)
-start_region = b.change_map_gen_collision_tile(start_region, 'water-tile', 'landfill')
+start_region = b.change_map_gen_collision_tile(start_region, 'water_tile', 'landfill')
 start_region = b.remove_map_gen_resources(start_region)
 local start_water = b.change_tile(b.circle(5), true, 'water')
 map = b.any {start_water, start_region, map}

@@ -50,9 +50,9 @@ RecipeLocker.lock_recipes(
         'fast-underground-belt',
         'express-underground-belt',
         'pipe-to-ground',
-        'logistic-chest-requester',
-        'logistic-chest-buffer',
-        'logistic-chest-active-provider'
+        'requester-chest',
+        'buffer-chest',
+        'active-provider-chest'
     }
 )
 
@@ -75,8 +75,8 @@ local function no_rocks(_, _, world, tile)
 end
 
 local start = b.full_shape
-start = b.change_map_gen_collision_tile(start, 'ground-tile', 'refined-concrete')
-start = b.change_map_gen_collision_hidden_tile(start, 'ground-tile', 'lab-dark-2')
+start = b.change_map_gen_collision_tile(start, 'ground_tile', 'refined-concrete')
+start = b.change_map_gen_collision_hidden_tile(start, 'ground_tile', 'lab-dark-2')
 local map = b.if_else(start, b.full_shape)
 
 map = b.apply_effect(map, no_rocks)

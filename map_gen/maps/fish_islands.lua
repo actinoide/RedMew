@@ -244,7 +244,7 @@ start = b.apply_entity(start, b.any {start_iron, start_copper, start_stone, star
 
 map = b.if_else(start, map)
 
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 
 local sea = b.tile('water')
 sea = b.fish(sea, 0.0025)

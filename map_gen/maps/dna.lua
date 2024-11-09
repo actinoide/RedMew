@@ -90,7 +90,7 @@ for i = 1, count - 1 do
 
     local c = lines_circle
     c = b.apply_entity(c, resources[i])
-    c = b.change_map_gen_collision_tile(c, 'water-tile', 'grass-1')
+    c = b.change_map_gen_collision_tile(c, 'water_tile', 'grass-1')
     c = b.translate(c, x, 0)
 
     table.insert(lines, c)
@@ -156,7 +156,7 @@ local start =
 start = b.any {start, big_circle}
 
 map = b.choose(big_circle, start, map)
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 
 map = b.scale(map, 5, 5)
 

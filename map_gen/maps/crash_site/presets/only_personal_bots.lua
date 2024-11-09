@@ -50,8 +50,8 @@ Event.add(defines.events.on_research_finished,
       return
     end
     game.forces.player.recipes['roboport'].enabled = false
-    game.forces.player.recipes['logistic-chest-passive-provider'].enabled = false
-    game.forces.player.recipes['logistic-chest-storage'].enabled = false
+    game.forces.player.recipes['passive-provider-chest'].enabled = false
+    game.forces.player.recipes['storage-chest'].enabled = false
   end
 )
 

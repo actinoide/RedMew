@@ -758,7 +758,7 @@ local function to_shape(blocks, part_size, on_init)
         return tile
     end
 
-    return b.change_map_gen_collision_hidden_tile(shape, 'water-tile', 'grass-1')
+    return b.change_map_gen_collision_hidden_tile(shape, 'water_tile', 'grass-1')
 end
 
 Public.to_shape = to_shape
@@ -872,9 +872,9 @@ function Public.make_4_way(data)
                 local dir = entity.direction or 0
 
                 set_entity(north, i, entity)
-                set_entity(east, i2, change_direction(entity, (dir + 2) % 8))
-                set_entity(south, i3, change_direction(entity, (dir + 4) % 8))
-                set_entity(west, i4, change_direction(entity, (dir + 6) % 8))
+                set_entity(east, i2, change_direction(entity, (dir + 4) % 16))
+                set_entity(south, i3, change_direction(entity, (dir + 8) % 16))
+                set_entity(west, i4, change_direction(entity, (dir + 12) % 16))
             end
         end
     end
@@ -1670,7 +1670,7 @@ local function turret_died(event)
 
     turret_to_outpost[registration_number] = nil
 
-    local number = event.unit_number
+    local number = event.useful_id
     if not number then
         return
     end

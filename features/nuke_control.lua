@@ -90,7 +90,7 @@ local function is_allowed_deconstruction_planner(cursor_stack)
     end
 
     local filters = cursor_stack.entity_filters
-    if #filters ~= 1 or filters[1] ~= 'sand-rock-big' then
+    if #filters ~= 1 or filters[1] ~= 'big-rock' then
         return false
     end
 

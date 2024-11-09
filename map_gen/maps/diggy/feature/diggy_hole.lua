@@ -76,7 +76,7 @@ local function update_robot_mining_damage()
     robot_mining.damage = old_modifier + robot_mining.active_modifier
 end
 
----Triggers a diggy diggy hole for a given sand-rock-big, rock-big or huge-rock.
+---Triggers a diggy diggy hole for a given big-rock, rock-big or huge-rock.
 ---@param entity LuaEntity
 local function diggy_hole(entity)
     local tiles = {}
@@ -117,7 +117,7 @@ local function diggy_hole(entity)
         elseif predicted < 0.6 then
             rocks[i] = {name = 'rock-big', position = void_position}
         else
-            rocks[i] = {name = 'sand-rock-big', position = void_position}
+            rocks[i] = {name = 'big-rock', position = void_position}
         end
     end
 

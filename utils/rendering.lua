@@ -10,13 +10,7 @@ local rendering = rendering
 local draw_polygon = rendering.draw_polygon
 
 function Public.draw_polygon(positions, options)
-    local vertices = {}
-
-    for i = 1, #positions do
-        vertices[i] = {target = positions[i]}
-    end
-
-    local args = {vertices = vertices}
+    local args = { vertices = positions }
     for k, v in pairs(options) do
         args[k] = v
     end

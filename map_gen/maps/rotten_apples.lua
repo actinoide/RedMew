@@ -383,7 +383,7 @@ end
 
 local map = b.grid_pattern_full_overlap(pattern, p_cols, p_rows, 500, 500)
 
-map = b.change_map_gen_collision_tile(map, 'water-tile', 'grass-1')
+map = b.change_map_gen_collision_tile(map, 'water_tile', 'grass-1')
 
 local sea = b.change_tile(apple, false, 'water')
 sea = b.fish(sea, 0.005)

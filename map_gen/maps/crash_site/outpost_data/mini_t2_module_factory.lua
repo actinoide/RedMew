@@ -4,7 +4,7 @@ local Token = require 'utils.token'
 local loot = {
     {weight = 10},
     {stack = {name = 'coin', count = 50, distance_factor = 1 / 20}, weight = 5},
-    {stack = {name = 'effectivity-module-2', count = 7, distance_factor = 1 / 20}, weight = 5},
+    {stack = {name = 'efficiency-module-2', count = 7, distance_factor = 1 / 20}, weight = 5},
     {stack = {name = 'speed-module-2', count = 5, distance_factor = 1 / 20}, weight = 5},
     {stack = {name = 'productivity-module-2', count = 5, distance_factor = 1 / 20}, weight = 5}
 }
@@ -21,8 +21,8 @@ local loot_callback =
 local factory_loot = {
     {
         stack = {
-            recipe = 'effectivity-module-2',
-            output = {item = 'effectivity-module-2', min_rate = 0.5 / 30 / 60, distance_factor = 0.5 / 30 / 60 / 512}
+            recipe = 'efficiency-module-2',
+            output = {item = 'efficiency-module-2', min_rate = 0.5 / 30 / 60, distance_factor = 0.5 / 30 / 60 / 512}
         },
         weight = 5
     },

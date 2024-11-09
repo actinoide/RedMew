@@ -92,7 +92,7 @@ local config = {
                 ['market'] = 9,
                 ['nuclear-reactor'] = 4,
                 ['stone-wall'] = 3,
-                ['sand-rock-big'] = 2,
+                ['big-rock'] = 2,
                 ['rock-big'] = 2,
                 ['huge-rock'] = 2.5,
                 ['out-of-map'] = 1,
@@ -164,8 +164,8 @@ local config = {
                 ['piercing-rounds-magazine'] = {chance = 0.10, min = 15, max = 35},
                 ['gun-turret'] = {chance = 0.3, min = 1, max = 2},
                 ['beacon'] = {chance = 0.01, min = 1, max = 2},
-                ['effectivity-module'] = {chance = 0.03, min = 1, max = 2},
-                ['effectivity-module-2'] = {chance = 0.01, min = 1, max = 2},
+                ['efficiency-module'] = {chance = 0.03, min = 1, max = 2},
+                ['efficiency-module-2'] = {chance = 0.01, min = 1, max = 2},
                 ['productivity-module'] = {chance = 0.03, min = 1, max = 2},
                 ['productivity-module-2'] = {chance = 0.01, min = 1, max = 2},
                 ['speed-module'] = {chance = 0.03, min = 1, max = 2},
@@ -358,7 +358,7 @@ local config = {
             -- percentage * mining productivity level gets added to mining speed
             mining_speed_productivity_multiplier = 5,
             XP = {
-                ['sand-rock-big'] = 5,
+                ['big-rock'] = 5,
                 ['rock-big'] = 5,
                 ['huge-rock'] = 10,
                 ['rocket_launch'] = 0.05, -- XP reward in percentage of total experience when a rocket launches (Diggy default: 0.05 which equals 5%)

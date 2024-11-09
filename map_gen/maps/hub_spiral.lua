@@ -41,15 +41,15 @@ walk_spiral2 = b.choose(b.circle(72), b.empty_shape, walk_spiral2)
 
 local map = b.circular_spiral_grow_pattern(16, 32, 512, {tree, iron, stone, coal, rock, copper, uranium, oil})
 
-local start_cirle = b.circle(64)
-start_cirle = b.change_map_gen_collision_tile(start_cirle, 'water-tile', 'grass-1')
+local start_circle = b.circle(64)
+start_circle = b.change_map_gen_collision_tile(start_circle, 'water_tile', 'grass-1')
 local spawn_water = b.circle(4)
 spawn_water = b.translate(spawn_water, 0, 6)
 spawn_water = b.change_tile(spawn_water, true, 'water')
 spawn_water = b.fish(spawn_water, 1)
-start_cirle = b.any {spawn_water, start_cirle}
+start_circle = b.any {spawn_water, start_circle}
 
-map = b.any {start_cirle, walk_spiral1, map, walk_spiral2}
+map = b.any {start_circle, walk_spiral1, map, walk_spiral2}
 
 local worm_names = {
     'small-worm-turret',

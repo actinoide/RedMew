@@ -7,11 +7,11 @@ local loot = {
     {stack = {name = 'logistic-robot', count = 50, distance_factor = 1 / 16}, weight = 4},
     {stack = {name = 'construction-robot', count = 50, distance_factor = 1 / 16}, weight = 7},
     {stack = {name = 'roboport', count = 5, distance_factor = 1 / 64}, weight = 2},
-    {stack = {name = 'logistic-chest-storage', count = 20, distance_factor = 1 / 48}, weight = 4},
-    {stack = {name = 'logistic-chest-requester', count = 20, distance_factor = 1 / 48}, weight = 4},
-    {stack = {name = 'logistic-chest-passive-provider', count = 20, distance_factor = 1 / 48}, weight = 4},
-    {stack = {name = 'logistic-chest-buffer', count = 20, distance_factor = 1 / 48}, weight = 4},
-    {stack = {name = 'logistic-chest-active-provider', count = 20, distance_factor = 1 / 48}, weight = 4}
+    {stack = {name = 'storage-chest', count = 20, distance_factor = 1 / 48}, weight = 4},
+    {stack = {name = 'requester-chest', count = 20, distance_factor = 1 / 48}, weight = 4},
+    {stack = {name = 'passive-provider-chest', count = 20, distance_factor = 1 / 48}, weight = 4},
+    {stack = {name = 'buffer-chest', count = 20, distance_factor = 1 / 48}, weight = 4},
+    {stack = {name = 'active-provider-chest', count = 20, distance_factor = 1 / 48}, weight = 4}
 }
 
 local weights = ob.prepare_weighted_loot(loot)
