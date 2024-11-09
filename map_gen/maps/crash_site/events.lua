@@ -245,7 +245,7 @@ local function do_pole(entity)
         return
     end
 
-    local supply_area_distance = entity.get_supply_area_distance(entity.quality)
+    local supply_area_distance = entity.prototype.get_supply_area_distance(entity.quality)
     if not supply_area_distance then
         return
     end
