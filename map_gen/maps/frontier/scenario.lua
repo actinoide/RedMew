@@ -67,7 +67,7 @@ ScenarioInfo.set_new_info([[
 
 --- Config
 local Config = storage.config
-Config.redmew_surface.enabled = true
+Config.redmew_surface.enabled = false
 Config.market.enabled = false
 Config.player_rewards.enabled = false
 Config.player_shortcuts.enabled = true
