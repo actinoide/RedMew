@@ -500,7 +500,7 @@ handler = function(event)
         tick = tick
     }
 
-    debug_print('Waypoint_index ' .. waypoint_index .. ' (waypoint #' .. waypoint_index + 1 .. ') callback in ' .. ticks .. ' ticks')
+    debug_print('Waypoint_index ' .. waypoint_index .. ' (waypoint #' .. (waypoint_index + 1) .. ') callback in ' .. ticks .. ' ticks')
 
     set_timeout_in_ticks(ticks, callback_function, {func = running_cutscene.func, player_index = player_index, waypoint_index = waypoint_index - 1, params = params})
 end
@@ -590,7 +590,7 @@ Gui.on_click(
     forward_btn_name,
     function(event)
         local player_index = event.player_index
-        if Public.goTo(event.player_index, running_cutscenes[player_index].current_index + 1) == false then
+        if Public.goTo(player_index, running_cutscenes[player_index].current_index + 1) == false then
             game.get_player(player_index).print("Cutscene: You're already at the end")
         end
     end

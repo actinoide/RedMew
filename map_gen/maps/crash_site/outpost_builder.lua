@@ -1670,7 +1670,7 @@ local function turret_died(event)
 
     turret_to_outpost[registration_number] = nil
 
-    local number = event.unit_number
+    local number = event.useful_id
     if not number then
         return
     end
