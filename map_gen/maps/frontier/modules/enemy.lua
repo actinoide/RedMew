@@ -54,7 +54,7 @@ Enemy.commands = {
     }
     unit_group.start_moving()
     if Public.get()._DEBUG_AI then
-      Debug.print_admins(string.format('AI [id=%d] | cmd: MOVE [gps=%.2f,%.2f,%s]', unit_group.id, position.x, position.y, unit_group.surface.name), Color.dark_gray)
+      Debug.print_admins(string.format('AI [id=%d] | cmd: MOVE [gps=%.2f,%.2f,%s]', unit_group.unique_id, position.x, position.y, unit_group.surface.name), Color.dark_gray)
     end
   end,
   scout = function(unit_group, position)
@@ -73,7 +73,7 @@ Enemy.commands = {
     }
     unit_group.start_moving()
     if Public.get()._DEBUG_AI then
-      Debug.print_admins(string.format('AI [id=%d] | cmd: SCOUT [gps=%.2f,%.2f,%s]', unit_group.id, position.x, position.y, unit_group.surface.name), Color.dark_gray)
+      Debug.print_admins(string.format('AI [id=%d] | cmd: SCOUT [gps=%.2f,%.2f,%s]', unit_group.unique_id, position.x, position.y, unit_group.surface.name), Color.dark_gray)
     end
   end,
   attack = function(unit_group, target)
@@ -92,7 +92,7 @@ Enemy.commands = {
       distraction = defines.distraction.by_damage
     }
     if Public.get()._DEBUG_AI then
-      Debug.print_admins(string.format('AI [id=%d] | cmd: ATTACK [gps=%.2f,%.2f,%s] (type = %s)', unit_group.id, target.position.x, target.position.y, unit_group.surface.name, target.type), Color.dark_gray)
+      Debug.print_admins(string.format('AI [id=%d] | cmd: ATTACK [gps=%.2f,%.2f,%s] (type = %s)', unit_group.unique_id, target.position.x, target.position.y, unit_group.surface.name, target.type), Color.dark_gray)
     end
   end
 }
@@ -132,12 +132,12 @@ Enemy.turret_raffle = {
 
 function Enemy.ai_take_control(unit_group)
   local this = Public.get()
-  if not this.unit_groups[unit_group.id] then
-    this.unit_groups[unit_group.id] = {
+  if not this.unit_groups[unit_group.unique_id] then
+    this.unit_groups[unit_group.unique_id] = {
       unit_group = unit_group
     }
   end
-  return this.unit_groups[unit_group.id]
+  return this.unit_groups[unit_group.unique_id]
 end
 
 function Enemy.ai_stage_by_distance(posA, posB)
@@ -159,13 +159,13 @@ function Enemy.ai_processor(unit_group, result)
   end
 
   local this = Public.get()
-  local data = this.unit_groups[unit_group.id]
+  local data = this.unit_groups[unit_group.unique_id]
   if not data then
     return
   end
 
   if data.failed_attempts and data.failed_attempts >= 3 then
-    this.unit_groups[unit_group.id] = nil
+    this.unit_groups[unit_group.unique_id] = nil
     return
   end
 
@@ -185,7 +185,7 @@ function Enemy.ai_processor(unit_group, result)
       force = 'enemy',
     }
     if not (data.target and data.target.valid) then
-      this.unit_groups[unit_group.id] = nil
+      this.unit_groups[unit_group.unique_id] = nil
       return
     end
     data.position = data.target.position
@@ -195,7 +195,7 @@ function Enemy.ai_processor(unit_group, result)
   end
 
   if this._DEBUG_AI then
-    Debug.print_admins(string.format('AI [id=%d] | status: %d', unit_group.id, data.stage), Color.dark_gray)
+    Debug.print_admins(string.format('AI [id=%d] | status: %d', unit_group.unique_id, data.stage), Color.dark_gray)
   end
 
   if data.stage == Enemy.stages.move then
@@ -207,7 +207,7 @@ function Enemy.ai_processor(unit_group, result)
   else
     data.failed_attempts = (data.failed_attempts or 0) + 1
     if this._DEBUG_AI then
-      Debug.print_admins(string.format('AI [id=%d] | FAIL | stage: %d | attempts: %d', unit_group.id, data.stage, data.failed_attempts), Color.dark_gray)
+      Debug.print_admins(string.format('AI [id=%d] | FAIL | stage: %d | attempts: %d', unit_group.unique_id, data.stage, data.failed_attempts), Color.dark_gray)
     end
     data.stage, data.position, data.target = nil, nil, nil
     Enemy.ai_processor(unit_group, nil)
@@ -292,9 +292,10 @@ function Enemy.on_enemy_died(entity)
   this.invincible[uid] = nil
 
   if new_entity.type == 'unit' then
-    if entity.unit_group then
-      entity.unit_group.add_member(new_entity)
-      entity.unit_group.set_command(entity.command)
+    local commandable = entity.commandable
+    if commandable and commandable.is_unit_group then
+      commandable.add_member(new_entity)
+      commandable.set_command(entity.command)
     end
   end
 end
@@ -439,7 +440,8 @@ function Enemy.stop_tracking(entity)
 end
 
 function Enemy.get_target()
-  return Table.get_random_dictionary_entry(Public.get().target_entities, false)
+  local _dict = Public.get().target_entities
+  return Table.get_random_dictionary_entry(_dict, false)
 end
 
 function Enemy.nuclear_explosion(position)

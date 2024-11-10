@@ -120,8 +120,11 @@ function Market.spawn_exchange_market(position)
     rendering.draw_sprite {
       sprite = 'utility/entity_info_dark_background',
       surface = surface,
-      target = market,
-      target_offset = icon_offset,
+      target = {
+        entity = market,
+        offset = icon_offset,
+        position = market.position,
+      },
       x_scale = icon_scale * 2,
       y_scale = icon_scale * 2,
       only_in_alt_mode = true
@@ -129,8 +132,11 @@ function Market.spawn_exchange_market(position)
     rendering.draw_sprite {
       sprite = 'item/' .. most_expensive_item.name,
       surface = surface,
-      target = market,
-      target_offset = icon_offset,
+      target = {
+        entity = market,
+        offset = icon_offset,
+        position = market.position,
+      },
       x_scale = icon_scale,
       y_scale = icon_scale,
       only_in_alt_mode = true

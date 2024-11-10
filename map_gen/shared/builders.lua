@@ -1904,40 +1904,40 @@ function Builders.set_hidden_tile(shape, hidden_tile)
 end
 
 local collision_map = {
-    ['concrete'] = 'ground-tile',
-    ['deepwater-green'] = 'water-tile',
-    ['deepwater'] = 'water-tile',
-    ['dirt-1'] = 'ground-tile',
-    ['dirt-2'] = 'ground-tile',
-    ['dirt-3'] = 'ground-tile',
-    ['dirt-4'] = 'ground-tile',
-    ['dirt-5'] = 'ground-tile',
-    ['dirt-6'] = 'ground-tile',
-    ['dirt-7'] = 'ground-tile',
-    ['dry-dirt'] = 'ground-tile',
-    ['grass-1'] = 'ground-tile',
-    ['grass-2'] = 'ground-tile',
-    ['grass-3'] = 'ground-tile',
-    ['grass-4'] = 'ground-tile',
-    ['hazard-concrete-left'] = 'ground-tile',
-    ['hazard-concrete-right'] = 'ground-tile',
-    ['lab-dark-1'] = 'ground-tile',
-    ['lab-dark-2'] = 'ground-tile',
-    ['lab-white'] = 'ground-tile',
+    ['concrete'] = 'ground_tile',
+    ['deepwater-green'] = 'water_tile',
+    ['deepwater'] = 'water_tile',
+    ['dirt-1'] = 'ground_tile',
+    ['dirt-2'] = 'ground_tile',
+    ['dirt-3'] = 'ground_tile',
+    ['dirt-4'] = 'ground_tile',
+    ['dirt-5'] = 'ground_tile',
+    ['dirt-6'] = 'ground_tile',
+    ['dirt-7'] = 'ground_tile',
+    ['dry-dirt'] = 'ground_tile',
+    ['grass-1'] = 'ground_tile',
+    ['grass-2'] = 'ground_tile',
+    ['grass-3'] = 'ground_tile',
+    ['grass-4'] = 'ground_tile',
+    ['hazard-concrete-left'] = 'ground_tile',
+    ['hazard-concrete-right'] = 'ground_tile',
+    ['lab-dark-1'] = 'ground_tile',
+    ['lab-dark-2'] = 'ground_tile',
+    ['lab-white'] = 'ground_tile',
     ['out-of-map'] = false,
-    ['red-desert-0'] = 'ground-tile',
-    ['red-desert-1'] = 'ground-tile',
-    ['red-desert-2'] = 'ground-tile',
-    ['red-desert-3'] = 'ground-tile',
-    ['sand-1'] = 'ground-tile',
-    ['sand-2'] = 'ground-tile',
-    ['sand-3'] = 'ground-tile',
-    ['stone-path'] = 'ground-tile',
-    ['water-green'] = 'water-tile',
-    ['water'] = 'water-tile',
-    ['refined-concrete'] = 'ground-tile',
-    ['refined-hazard-concrete-left'] = 'ground-tile',
-    ['refined-hazard-concrete-right'] = 'ground-tile'
+    ['red-desert-0'] = 'ground_tile',
+    ['red-desert-1'] = 'ground_tile',
+    ['red-desert-2'] = 'ground_tile',
+    ['red-desert-3'] = 'ground_tile',
+    ['sand-1'] = 'ground_tile',
+    ['sand-2'] = 'ground_tile',
+    ['sand-3'] = 'ground_tile',
+    ['stone-path'] = 'ground_tile',
+    ['water-green'] = 'water_tile',
+    ['water'] = 'water_tile',
+    ['refined-concrete'] = 'ground_tile',
+    ['refined-hazard-concrete-left'] = 'ground_tile',
+    ['refined-hazard-concrete-right'] = 'ground_tile'
 }
 
 --- Docs: https://github.com/Refactorio/RedMew/wiki/Using-the-Builders#builderschange_collision_tile
@@ -2096,7 +2096,7 @@ function Builders.overlay_tile_land(shape, tile_shape)
     return function(x, y, world)
         local function handle_tile(tile)
             if type(tile) == 'boolean' then
-                return tile and not world.surface.get_tile(world.x, world.y).collides_with('water-tile')
+                return tile and not world.surface.get_tile(world.x, world.y).collides_with('water_tile')
             else
                 return not bad_tiles[tile]
             end
@@ -2136,7 +2136,7 @@ function Builders.fish(shape, spawn_rate)
                     return {name = 'fish'}
                 end
             elseif tile then
-                if world.surface.get_tile(world.x, world.y).collides_with('water-tile') and spawn_rate >= random() then
+                if world.surface.get_tile(world.x, world.y).collides_with('water_tile') and spawn_rate >= random() then
                     return {name = 'fish'}
                 end
             end

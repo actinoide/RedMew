@@ -5,6 +5,7 @@ local Restart = require 'features.restart_command'
 local ShareGlobals = require 'map_gen.maps.april_fools.scenario.shared_globals'
 local ScoreTracker = require 'utils.score_tracker'
 local PlayerStats = require 'features.player_stats'
+local RS = require 'map_gen.shared.redmew_surface'
 local format_number = require 'util'.format_number
 
 return function(config)
@@ -143,7 +144,7 @@ return function(config)
     local total_ore = 0
     local ore_totals_message = '('
     for ore_name in pairs(ore_products) do
-      local count = game.forces["player"].get_item_production_statistics.get_input_count(ore_name)
+      local count = game.forces["player"].get_item_production_statistics(RS.get_surface_name()).get_input_count(ore_name)
       total_ore = total_ore + count
       ore_totals_message = ore_totals_message..ore_name:gsub( "-ore", "")..": "..format_number(count, true)..", "
     end

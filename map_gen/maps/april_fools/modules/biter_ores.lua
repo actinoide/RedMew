@@ -68,7 +68,7 @@ local function spawn_ores_on_death(event)
       ore_type = found_ores[math.random(1,#found_ores)].name
     end
 
-    if surface.get_tile(position).collides_with("ground-tile") then
+    if surface.get_tile(position).collides_with("ground_tile") then
       surface.create_entity{name = ore_type, position = position, amount = ore_amount_to_add}
     end
     --return since we might have changed found_ores

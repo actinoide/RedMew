@@ -353,7 +353,7 @@ local function quadrants(x, y)
     end
 
     if (abs_x <= 200 and abs_y <= 200) then
-        if game.surfaces[2].get_tile(x, y).collides_with('water-tile') then
+        if game.surfaces[2].get_tile(x, y).collides_with('water_tile') then
             game.surfaces[2].set_tiles({{name = 'grass-1', position = {x, y}}}, true)
         end
         local entities = game.surfaces[2].find_entities({{x - 0.5, y - 0.5}, {x + 0.5, y + 0.5}})

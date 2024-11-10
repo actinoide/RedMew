@@ -27,7 +27,7 @@ local oil =
     b.resource(b.throttle_world_xy(ore_shape, 1, 8, 1, 8), 'crude-oil', value(150000, 5, 1.05), true)
 )
 local tree = b.apply_entity(b.full_shape, b.entity(ore_shape, 'tree-01'))
-local rock = b.apply_entity(b.full_shape, b.entity(ore_shape, 'rock-big'))
+local rock = b.apply_entity(b.full_shape, b.entity(ore_shape, 'big-rock'))
 
 local walk_spiral1 = b.circular_spiral_n_threads(3, 512, 8)
 walk_spiral1 = b.flip_x(walk_spiral1)

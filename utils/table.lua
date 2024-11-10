@@ -139,7 +139,11 @@ end
 -- @param key <boolean> to indicate whether to return the key or value
 -- @return <any> a random element of table t
 function table.get_random_dictionary_entry(t, key)
-    local target_index = random(1, table_size(t))
+    local t_size = table_size(t)
+    if t_size == 0 then
+        return
+    end
+    local target_index = random(1, t_size)
     local count = 1
     for k, v in pairs(t) do
         if target_index == count then

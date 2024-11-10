@@ -68,8 +68,11 @@ function SpawnShop.add_render()
     sprite = script.active_mods['redmew-data'] and 'neon-lightning' or 'achievement/lazy-bastard',
     x_scale = 0.8,
     y_scale = 0.8,
-    target = e,
-    target_offset = { 0.8, -4.5 },
+    target = {
+      entity = e,
+      offset = { 0.8, -4.5 },
+      position = e.position,
+    },
     surface = e.surface,
   }
   game.forces.player.add_chart_tag(e.surface, {
@@ -210,7 +213,7 @@ function SpawnShop.draw_gui(player)
         table.add {
           type = 'sprite-button',
           sprite = 'item/'..item_stack.name,
-          style = satisfied and 'recipe_slot_button' or 'yellow_slot_button',
+          style = satisfied and 'slot_button' or 'yellow_slot_button',
           number = item_stack.count,
           tooltip = {'frontier.tt_shop_item_stack', {'?', {'item-name.'..item_stack.name}, {'entity-name.'..item_stack.name}, item_stack.name}, item_stack.count, (satisfied and 'green' or 'yellow') }
         }
@@ -394,7 +397,9 @@ end
 function SpawnShop.on_player_refresh(player)
   local this = Public.get()
   this.spawn_shop_funds = this.spawn_shop_funds - 1
-  this.spawn_shop_cooldown[player.index] = game.tick + 40 * SECOND
+  if not player.admin then
+    this.spawn_shop_cooldown[player.index] = game.tick + 40 * SECOND
+  end
   ScoreTracker.set_for_global(Public.scores.shop_funds.name, this.spawn_shop_funds)
   player.print('[color=orange][Bard][/color] ' .. bard_refresh_messages[math_random(#bard_refresh_messages)], { sound_path = 'utility/scenario_message', color = Color.dark_grey })
   if this.spawn_shop_funds <= 5 then
@@ -480,7 +485,7 @@ function SpawnShop.upgrade_perk(id, levels)
   elseif id == 'p_crafting_speed' then
     players.manual_crafting_speed_modifier = players.manual_crafting_speed_modifier + 0.02 * levels
   elseif id == 'p_health_bonus' then
-    local HP = prototypes.entity.character.max_health
+    local HP = prototypes.entity.character.get_max_health()
     players.character_health_bonus = players.character_health_bonus + math_ceil(0.02 * HP)  * levels
   elseif id == 'p_inventory_size' then
     players.character_inventory_slots_bonus = players.character_inventory_slots_bonus + 5 * levels

@@ -67,7 +67,7 @@ ScenarioInfo.set_new_info([[
 
 --- Config
 local Config = storage.config
-Config.redmew_surface.enabled = true
+Config.redmew_surface.enabled = false
 Config.market.enabled = false
 Config.player_rewards.enabled = false
 Config.player_shortcuts.enabled = true
@@ -260,7 +260,7 @@ local function on_player_changed_position(event)
   end
 
   local this = Public.get()
-  if player.position.x < (-this.left_boundary * 32 - this.kraken_distance) then
+  if player.physical_position.x < (-this.left_boundary * 32 - this.kraken_distance) then
     local player_name = 'a player'
     if player.character ~= nil then
       player_name = player.name

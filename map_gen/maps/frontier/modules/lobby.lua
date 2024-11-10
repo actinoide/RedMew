@@ -3,7 +3,7 @@ local Public = require 'map_gen.maps.frontier.shared.core'
 
 local Lobby = {}
 
-Lobby.name = 'nauvis'
+Lobby.name = 'lobby'
 Lobby.mgs = {
   water = 0,
   default_enable_all_autoplace_controls = false,
@@ -83,6 +83,9 @@ function Lobby.on_init()
   local surface = Lobby.get_surface()
   surface.map_gen_settings = Lobby.mgs
   Lobby.on_chunk_generated({ area = {left_top = { x = -Lobby.mgs.width, y = -Lobby.mgs.height }, right_bottom = { x = Lobby.mgs.width, y = Lobby.mgs.height }}, surface = surface })
+  for _, f in pairs(game.forces) do
+    f.set_surface_hidden(surface.name, true)
+  end
 end
 
 return Lobby
