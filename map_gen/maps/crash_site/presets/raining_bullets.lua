@@ -46,13 +46,13 @@ Event.on_init(function()
   game.forces.player.technologies['laser-shooting-speed-5'].enabled = false
   game.forces.player.technologies['laser-shooting-speed-6'].enabled = false
   game.forces.player.technologies['laser-shooting-speed-7'].enabled = false
-  game.forces.player.technologies['energy-weapons-damage-1'].enabled = false
-  game.forces.player.technologies['energy-weapons-damage-2'].enabled = false
-  game.forces.player.technologies['energy-weapons-damage-3'].enabled = false
-  game.forces.player.technologies['energy-weapons-damage-4'].enabled = false
-  game.forces.player.technologies['energy-weapons-damage-5'].enabled = false
-  game.forces.player.technologies['energy-weapons-damage-6'].enabled = false
-  game.forces.player.technologies['energy-weapons-damage-7'].enabled = false
+  game.forces.player.technologies['laser-weapons-damage-1'].enabled = false
+  game.forces.player.technologies['laser-weapons-damage-2'].enabled = false
+  game.forces.player.technologies['laser-weapons-damage-3'].enabled = false
+  game.forces.player.technologies['laser-weapons-damage-4'].enabled = false
+  game.forces.player.technologies['laser-weapons-damage-5'].enabled = false
+  game.forces.player.technologies['laser-weapons-damage-6'].enabled = false
+  game.forces.player.technologies['laser-weapons-damage-7'].enabled = false
   game.forces.player.technologies['distractor'].enabled = false
   game.forces.player.technologies['destroyer'].enabled = false
 end)
