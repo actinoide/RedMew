@@ -440,11 +440,8 @@ function Enemy.stop_tracking(entity)
 end
 
 function Enemy.get_target()
-  local _list = Public.get().target_entities
-  if table_size(_list) == 0 then
-    return
-  end
-  return Table.get_random_dictionary_entry(_list, false)
+  local _dict = Public.get().target_entities
+  return Table.get_random_dictionary_entry(_dict, false)
 end
 
 function Enemy.nuclear_explosion(position)
