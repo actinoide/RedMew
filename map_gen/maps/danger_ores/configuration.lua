@@ -64,6 +64,13 @@ return {
     max_pollution = 15000,
     pollution_increment = 4,
   },
+  technologies = {
+    enabled = true,
+    unlocks = {
+      ['uranium-mining'] = { 'uranium-processing' },
+      ['oil-gathering'] = { 'oil-processing', 'coal-liquefaction' },
+    },
+  },
   game = {
     draw_resource_selection = false,
     technology_price_multiplier = 25,
