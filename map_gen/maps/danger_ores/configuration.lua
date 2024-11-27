@@ -8,8 +8,10 @@ return {
   },
   allowed_entities = {
     enabled = true,
-    entities = require 'map_gen.maps.danger_ores.config.vanilla_allowed_entities',
-    message = nil,
+    refund = true,
+    types = require 'map_gen.maps.danger_ores.config.vanilla_allowed_entities',
+    allowed_entities = {},
+    banned_entities = {},
   },
   biter_drops = {
     enabled = true,
