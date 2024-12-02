@@ -446,33 +446,24 @@ local config = {
             enabled = true,
             load = function() return require('map_gen.maps.diggy.feature.weapon_balance') end
         },
-        danger_ore = {
-			enabled = true,
-			load = function() return require('map_gen.maps.diggy.feature.danger_ore') end,
-			allowed_entities = {
-				'transport-belt',
-				'fast-transport-belt',
-				'express-transport-belt',
-				'underground-belt',
-				'fast-underground-belt',
-				'express-underground-belt',
-				'small-electric-pole',
-				'medium-electric-pole',
-				'big-electric-pole',
-				'substation',
-				'electric-mining-drill',
-				'burner-mining-drill',
-				'pumpjack',
-				'car',
-				'tank',
-				'spidertron',
-				'stone-wall',
-				'small-lamp',
-				'pipe',
-				'pipe-to-ground',
-				'wooden-chest'
-			}
-		},
+        allowed_entities = {
+            enabled = true,
+            refund = true,
+            load = function() return require 'map_gen.maps.danger_ores.modules.allowed_entities' end,
+            types = require 'map_gen.maps.danger_ores.config.vanilla_allowed_entities',
+            allowed_entities = { ['stone-wall'] = true },
+            banned_entities = {},
+        },
+        container_dump = {
+            enabled = true,
+            load = function() return require 'map_gen.maps.danger_ores.modules.container_dump' end,
+            entity_name = 'coal',
+        },
+        disable_mining_productivity = {
+            enabled = true,
+            load = function() return require 'map_gen.maps.danger_ores.modules.mining_productivity' end,
+            replace = true, -- replace mining productivity with robot cargo capacity
+        },
 		belts_n_bullets = {
 		    enabled = true,
 			load = function () return require('map_gen.maps.diggy.feature.belts_n_bullets') end,
@@ -502,6 +493,11 @@ local config = {
 
 ScenarioInfo.set_map_name('Diggy Danger Ores BnB')
 ScenarioInfo.set_map_description('Dig your way through!')
+ScenarioInfo.add_map_extra_info([[Danger! Ores are generally unstable to build upon.
+Only the following entities have been strengthened for building upon the ores:
+    [item=burner-mining-drill] [item=electric-mining-drill] [item=pumpjack] [item=small-electric-pole] [item=medium-electric-pole] [item=big-electric-pole] [item=substation] [item=car] [item=tank] [item=spidertron] [item=stone-wall]
+    [item=stone-wall][item=small-lamp][item=transport-belt] [item=fast-transport-belt] [item=express-transport-belt]  [item=underground-belt] [item=fast-underground-belt] [item=express-underground-belt] [item=pipe] [item=pipe-to-ground]
+]])
 
 local diggy = require 'map_gen.maps.diggy.scenario'
 return diggy.register(config)
