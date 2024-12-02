@@ -45,7 +45,14 @@ end
 ---@param params table
 ---@field surface LuaSurfaceIdentification will create the text only for those on the same surface
 function Game.create_local_flying_text(params)
-    local surface = game.get_surface(params.surface.name or params.surface.index or params.surface)
+    local surface_id = params.surface
+    if type(surface_id) == 'userdata' then
+        surface_id = surface_id.name or surface_id.index
+    end
+    if not surface_id then
+        return
+    end
+    local surface = game.get_surface(surface_id)
     if not surface then
         return
     end
