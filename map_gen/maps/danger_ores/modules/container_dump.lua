@@ -16,7 +16,9 @@ Global.register(
     end
 )
 
-return function(config)
+local Public = {}
+
+Public.register = function(config)
     local entity_name = config.entity_name or 'coal'
     Event.add(
         defines.events.on_entity_died,
@@ -100,3 +102,5 @@ return function(config)
         end
     )
 end
+
+return Public

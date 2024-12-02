@@ -6,7 +6,9 @@ local function starts_with(str, pattern)
   return str:sub(1, #pattern) == pattern
 end
 
-return function(config)
+local Public = {}
+
+Public.register = function(config)
   if config.replace then
     Event.add(defines.events.on_research_finished, function(event)
       local tech = event.research
@@ -51,3 +53,5 @@ return function(config)
     end)
   end
 end
+
+return Public

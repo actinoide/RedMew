@@ -316,7 +316,7 @@ local function on_entity_died(event)
     end
 
     local exp = config.XP['enemy_killed'] * (config.alien_experience_modifiers[entity.name] or 1)
-    cause.player.create_local_flying_text { text = {'', '[img=entity/' .. entity_name .. '] ', {'diggy.float_xp_gained_kill', exp}}, color = gain_xp_color }
+    cause.player.create_local_flying_text { position = cause.player.position, text = {'', '[img=entity/' .. entity_name .. '] ', {'diggy.float_xp_gained_kill', exp}}, color = gain_xp_color }
     add_experience(force, exp)
 end
 
@@ -327,7 +327,7 @@ local function on_player_respawned(event)
     local exp = remove_experience_percentage(player.force, config.XP['death-penalty'], 50)
     local text = {'', '[img=entity.character]', {'diggy.float_xp_drain', exp}}
     game.print({'diggy.player_drained_xp', player.name, exp}, {color = lose_xp_color})
-    Game.create_local_flying_text { text = text, color = lose_xp_color, create_at_cursor = true }
+    Game.create_local_flying_text { surface = player.surface, text = text, color = lose_xp_color, create_at_cursor = true }
     ScoreTracker.change_for_global(experience_lost_name, exp)
 end
 

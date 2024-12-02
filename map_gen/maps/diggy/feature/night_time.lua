@@ -51,7 +51,7 @@ function NightTime.on_init()
     local surface = RS.get_surface()
 
     surface.daytime = 0.5
-    surface.freeze_daytime = 1
+    surface.freeze_daytime = true
 end
 
 return NightTime

@@ -178,6 +178,7 @@ local function collapse(args)
 
     create_collapse_alert(surface, position)
 
+    template_insert(surface, {}, {{ name = 'big-explosion', position = position }})
     template_insert(surface, {}, create_collapse_template(positions, surface))
 
     raise_event(DiggyCaveCollapse.events.on_collapse, args)
