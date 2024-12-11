@@ -365,8 +365,8 @@ local config = {
         },
         disable_mining_productivity = {
             enabled = true,
-            load = function() return require 'map_gen.maps.danger_ores.modules.mining_productivity' end,
-            replace = true, -- replace mining productivity with robot cargo capacity
+            load = function() return require 'map_gen.maps.diggy.feature.mining_productivity' end,
+            replace = script.active_mods['redmew-data'] == nil, -- replace mining productivity with robot cargo capacity
         },
 		belts_n_bullets = {
 		    enabled = true,
