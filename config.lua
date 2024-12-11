@@ -565,6 +565,10 @@ storage.config = {
             ['behemoth-biter'] = 7,
             ['behemoth-spitter'] = 7,
             ['behemoth-worm-turret'] = 7
+        },
+        sound = {
+            path = nil,
+            duration = 60 * 60,
         }
     },
 }

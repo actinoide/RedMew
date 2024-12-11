@@ -14,10 +14,27 @@ math.cos = function(x)
     return math.floor(_cos(x) * 10000000 + 0.5) / 10000000
 end
 
--- rounds number (num) to certain number of decimal places (idp)
-math.round = function(num, idp)
+-- rounds a value to certain number of decimal places (idp)
+-- math.round(123456789.12345, 3) --> 123456789.123
+---@param value number
+---@param idp number
+---@return number
+math.round = function(value, idp)
     local mult = 10 ^ (idp or 0)
-    return math.floor(num * mult + 0.5) / mult
+    return math.floor(value * mult + 0.5) / mult
+end
+
+-- rounds a value to a specified number of significant figures (sf)
+-- math.round_sig(123456789.12345, 3) --> 123000000.0
+---@param value number
+---@param sf number
+---@return number
+math.round_sig = function(value, sf)
+    if value == 0 then
+        return value
+    end
+    local mag = 10 ^ (sf - math.ceil(math.log(value < 0 and -value or value, 10)))
+    return math.floor(value * mag + 0.5) / mag
 end
 
 math.clamp = function(num, min, max)
@@ -31,8 +48,8 @@ math.clamp = function(num, min, max)
 end
 
 --- Takes two points and calculates the slope of a line
--- @param x1, y1 numbers - cordinates of a point on a line
--- @param x2, y2 numbers - cordinates of a point on a line
+-- @param x1, y1 numbers - coordinates of a point on a line
+-- @param x2, y2 numbers - coordinates of a point on a line
 -- @return number - the slope of the line
 math.calculate_slope = function(x1, y1, x2, y2)
     return math.abs((y2 - y1) / (x2 - x1))

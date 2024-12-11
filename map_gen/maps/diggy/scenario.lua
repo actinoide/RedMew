@@ -55,6 +55,7 @@ function Scenario.register(diggy_config)
     redmew_config.hodor.enabled = false
     redmew_config.paint.enabled = false
     redmew_config.experience.enabled = true
+    redmew_config.experience.sound.path = 'diggy-diggy-chorus'
 
     restart_command({scenario_name = diggy_config.scenario_name})
 
