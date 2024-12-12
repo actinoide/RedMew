@@ -27,13 +27,19 @@ local remove_experience_percentage = ForceControl.remove_experience_percentage
 local set_item = Retailer.set_item
 
 local floor = math.floor
+local insert = table.insert
 local max = math.max
+local min = math.min
 local round_sig = math.round_sig
 local gain_xp_color = Color.light_sky_blue
 local lose_xp_color = Color.red
 
 local experience_lost_name = 'experience-lost'
+local on_bonuses, off_bonuses = '▼  Bonuses', '▲  Bonuses'
+local on_rewards, off_rewards = '▼  Rewards', '▲  Rewards'
 local force_sounds = {}
+local level_table = {}
+local gui_toggled = {}
 local mining_efficiency = { active_modifier = 0, research_modifier = 0, level_modifier = 0 }
 local inventory_slots = { active_modifier = 0, research_modifier = 0, level_modifier = 0 }
 local health_bonus = { active_modifier = 0, research_modifier = 0, level_modifier = 0 }
@@ -47,13 +53,15 @@ Global.register(
         mining_efficiency = mining_efficiency,
         inventory_slots = inventory_slots,
         health_bonus = health_bonus,
-        force_sounds = force_sounds
+        force_sounds = force_sounds,
+        gui_toggled = gui_toggled
     },
     function(tbl)
         mining_efficiency = tbl.mining_efficiency
         inventory_slots = tbl.inventory_slots
         health_bonus = tbl.health_bonus
         force_sounds = tbl.force_sounds
+        gui_toggled = tbl.gui_toggled
     end
 )
 
@@ -92,6 +100,23 @@ local level_up_formula = function(level_reached)
     return round_sig(value - lower_value, precision)
 end
 
+---Get experience requirement for a given level
+---Primarily used for the Experience GUI to display total experience required to unlock a specific item
+---@param level number a number specifying the level
+---@return number required total experience to reach supplied level
+local function calculate_level_xp(level)
+    if level_table[level] == nil then
+        local value
+        if level == 1 then
+            value = level_up_formula(level - 1)
+        else
+            value = level_up_formula(level - 1) + calculate_level_xp(level - 1)
+        end
+        insert(level_table, level, value)
+    end
+    return level_table[level]
+end
+
 ---Get a percentage of required experience between a level and the next level
 ---@param level number a number specifying the current level
 ---@return number a percentage of the required experience to level up from one level to the other
@@ -99,7 +124,8 @@ local function percentage_of_level_req(level, percentage)
     return level_up_formula(level) * percentage
 end
 
-local function play_levelup_sound(force)
+---@param force LuaForce
+local function play_level_up_sound(force)
     if not config.sound then
         return
     end
@@ -113,11 +139,64 @@ local function play_levelup_sound(force)
     force_sounds[force.index] = game.tick + (config.sound.duration or 20 * 60)
 end
 
+---@param parent LuaGuiElement
+---@param caption string
+---@param element string|table
 local function label_pair(parent, caption, element)
     local flow = parent.add { type = 'flow', direction = 'horizontal' }
     Gui.set_style(flow, { vertical_align = 'center' })
     flow.add { type = 'label', style = 'semibold_caption_label', caption = caption .. ':' }
     return (type(element) == 'table') and flow.add(element) or flow.add { type = 'label', caption = element }
+end
+
+---@param item table item data
+local function get_item_tooltip(item)
+    return {
+        '',
+        '[font=var]Item: [/font]',
+        {'?', {'entity-name.'..item.name}, {'item-name.'..item.name}, {'equipment-name.'..item.name} },
+        '\n[font=var]Price: [/font]'..item.price..' [img=item/coin]',
+        '\n[font=var]Unlocked at: [/font]'..Utils.comma_value(calculate_level_xp(item.level))..' XP'
+    }
+end
+
+---@field buff table of buff config
+---@field force LuaForce
+---@field formula? function
+---@field level_up? number
+---@field modifier table of modifiers
+---@field property string LuaForce::property to update
+local function update_modifier(params)
+    local buff = params.buff
+    local force = params.force
+    local formula = params.formula or function(p) return p.buff.value end
+    local level_up = params.level_up or 0
+    local modifier = params.modifier
+    local property = params.property
+
+    if not buff or force[property] >= (buff.max or math.huge) then
+        return
+    end
+    if level_up > 0 then
+        local value = formula(params)
+        if buff.double_level and (level_up % buff.double_level) == 0 then
+            value = 2 * value
+        end
+        modifier.level_modifier = modifier.level_modifier + value
+    end
+
+    -- remove the current buff
+    local old_modifier = force[property] - modifier.active_modifier
+    old_modifier = old_modifier >= 0 and old_modifier or 0
+
+    -- update the active modifier
+    modifier.active_modifier = modifier.research_modifier + modifier.level_modifier
+
+    -- add the new active modifier to the non-buffed modifier
+    force[property] = old_modifier + modifier.active_modifier
+    if buff.max then
+        force[property] = min(buff.max, force[property])
+    end
 end
 
 -- == GUI =====================================================================
@@ -142,9 +221,9 @@ Public.update_main_frame = function(player)
     data.label.tooltip = { 'experience.gui_total_xp', Utils.comma_value(force_data.total_experience) }
     data.progress.value = force_data.experience_percentage * 0.01
     data.progress.tooltip = { 'experience.gui_progress_bar', floor(force_data.experience_percentage * 100) * 0.01 }
-    data.bonus_mining_speed.caption = '+ '..(mining_efficiency.active_modifier * 100)..'%'
-    data.bonus_inventory_slot.caption = '+ '..inventory_slots.active_modifier
-    data.bonus_health_bonus.caption = '+ '..health_bonus.active_modifier..'%'
+    data.bonus_mining_speed.caption = '+ '..(player.force.manual_mining_speed_modifier * 100)..'%'
+    data.bonus_inventory_slot.caption = '+ '..player.force.character_inventory_slots_bonus
+    data.bonus_health_bonus.caption = '+ '..player.force.character_health_bonus..'%'
 
     for _, row in pairs(data.reward_list.children) do
         for _, item in pairs(row.children) do
@@ -190,12 +269,14 @@ Public.get_main_frame = function(player)
         data.progress = label_pair(content, 'Progress', { type = 'progressbar' })
     end
     do -- Bonuses
-        local label = sp.add { type = 'label', style = 'bold_label', caption = '▼ Bonuses', name = bonuses_button_name, tooltip = 'Hide/Show bonuses' }
+        local toggled = gui_toggled[player.index].bonuses
+        local label = sp.add { type = 'label', style = 'bold_label', caption = toggled and on_bonuses or off_bonuses, name = bonuses_button_name, tooltip = 'Hide/Show bonuses' }
         local deep = sp.add { type = 'frame', direction = 'vertical', style = 'deep_frame_in_shallow_frame_for_description' }
         Gui.set_style(deep, { padding = 0, minimal_height = 4 })
 
         local content = deep.add { type = 'flow', direction = 'vertical' }
         Gui.set_style(content, { padding = 8 })
+        content.visible = toggled
         Gui.set_data(label, { list = content })
 
         local buffs = config.buffs
@@ -209,7 +290,8 @@ Public.get_main_frame = function(player)
         data.bonus_health_bonus.tooltip = { 'experience.gui_buff_health', buffs.health_bonus.value, buffs.health_bonus.max }
     end
     do -- Rewards
-        local label = sp.add { type = 'label', style = 'bold_label', caption = '▲ Level rewards', name = rewards_list_button_name, tooltip = 'Hide/Show level rewards' }
+        local toggled = gui_toggled[player.index].rewards
+        local label = sp.add { type = 'label', style = 'bold_label', caption = toggled and on_rewards or off_rewards, name = rewards_list_button_name, tooltip = 'Hide/Show rewards' }
         local deep = sp.add { type = 'frame', style = 'deep_frame_in_shallow_frame_for_description', direction = 'vertical' }
         Gui.set_style(deep, { padding = 0, minimal_height = 4 })
 
@@ -217,7 +299,7 @@ Public.get_main_frame = function(player)
         local list = deep
             .add { type = 'scroll-pane', vertical_scroll_policy = 'dont-show-but-allow-scrolling' }
             .add { type = 'table', style = 'table_with_selection', column_count = 2 }
-        list.visible = false
+        list.visible = toggled
         Gui.set_data(label, { list = list })
         for _, item in pairs(config.unlockables) do
             if item.level ~= last.level then
@@ -235,7 +317,7 @@ Public.get_main_frame = function(player)
                 sprite = 'item.'..item.name,
                 number = item.price,
                 style = 'slot_button',
-                tooltip = {'', '[font=var]Item: [/font]', {"?", {'entity-name.'..item.name}, {'item-name.'..item.name}}, '\n[font=var]Price: [/font]'..item.price..' [img=item/coin]'},
+                tooltip = get_item_tooltip(item),
                 tags = { level = item.level }
             }
             Gui.set_style(button, { size = 32 })
@@ -243,7 +325,6 @@ Public.get_main_frame = function(player)
         end
         data.reward_list = list
     end
-    data.frame = frame
     Gui.set_data(frame, data)
     Public.update_main_frame(player)
 end
@@ -271,12 +352,14 @@ Gui.on_custom_close(main_frame_name, Public.toggle)
 Gui.on_click(bonuses_button_name, function(event)
     local list = Gui.get_data(event.element).list
     list.visible = not list.visible
-    event.element.caption = list.visible and '▼ Bonuses' or '▲ Bonuses'
+    event.element.caption = list.visible and on_bonuses or off_bonuses
+    gui_toggled[event.player_index].bonuses = list.visible
 end)
 Gui.on_click(rewards_list_button_name, function(event)
     local list = Gui.get_data(event.element).list
     list.visible = not list.visible
-    event.element.caption = list.visible and '▼ Level rewards' or '▲ Level rewards'
+    event.element.caption = list.visible and on_rewards or off_rewards
+    gui_toggled[event.player_index].rewards = list.visible
 end)
 
 -- == EVENTS ==================================================================
@@ -427,6 +510,10 @@ local function on_player_created(event)
         sprite = 'entity/market',
         tooltip = { 'experience.gui_experience_button_tip' },
     })
+    gui_toggled[player.index] = {
+        bonuses = true,
+        rewards = false,
+    }
 end
 
 ---Updates the experience progress gui for every player that has it open
@@ -464,7 +551,7 @@ local function on_level_reached(level_reached, force)
     Public.update_mining_speed(force, level_reached)
     Public.update_health_bonus(force, level_reached)
     Public.update_market_contents(force)
-    play_levelup_sound(force)
+    play_level_up_sound(force)
 end
 
 -- == EXPERIENCE ==============================================================
@@ -488,70 +575,43 @@ end
 ---@param force LuaForce the force of which will be updated
 ---@param level_up? number a level if updating as part of a level up
 Public.update_mining_speed = function(force, level_up)
-    local buff = config.buffs['mining_speed']
-    if buff.max == nil or force.manual_mining_speed_modifier < buff.max then
-        level_up = level_up ~= nil and level_up or 0
-        if level_up > 0 and buff ~= nil then
-            local level = get_force_data(force).current_level
-            local adjusted_value = floor(max(buff.value, 24 * 0.9 ^ level))
-            local value = (buff.double_level ~= nil and level_up % buff.double_level == 0) and adjusted_value * 2 or adjusted_value
-            mining_efficiency.level_modifier = mining_efficiency.level_modifier + (value * 0.01)
-        end
-        -- remove the current buff
-        local old_modifier = force.manual_mining_speed_modifier - mining_efficiency.active_modifier
-        old_modifier = old_modifier >= 0 and old_modifier or 0
-        -- update the active modifier
-        mining_efficiency.active_modifier = mining_efficiency.research_modifier + mining_efficiency.level_modifier
-
-        -- add the new active modifier to the non-buffed modifier
-        force.manual_mining_speed_modifier = old_modifier + mining_efficiency.active_modifier
-    end
+    update_modifier{
+        buff = config.buffs['mining_speed'],
+        force = force,
+        formula = function(params)
+            local level = get_force_data(params.force).current_level
+            return 0.01 * floor(max(params.buff.value, 24 * 0.9 ^ (level ^ 0.5)))
+        end,
+        level_up = level_up,
+        modifier = mining_efficiency,
+        property = 'manual_mining_speed_modifier',
+    }
 end
 
 ---Updates a forces inventory slots. By removing active modifiers and re-adding
 ---@param force LuaForce the force of which will be updated
 ---@param level_up? number a level if updating as part of a level up
 Public.update_inventory_slots = function(force, level_up)
-    local buff = config.buffs['inventory_slot']
-    if buff.max == nil or force.character_inventory_slots_bonus < buff.max then
-        level_up = level_up ~= nil and level_up or 0
-        if level_up > 0 and buff ~= nil then
-            local value = (buff.double_level ~= nil and level_up % buff.double_level == 0) and buff.value * 2 or buff.value
-            inventory_slots.level_modifier = inventory_slots.level_modifier + value
-        end
-
-        -- remove the current buff
-        local old_modifier = force.character_inventory_slots_bonus - inventory_slots.active_modifier
-        old_modifier = old_modifier >= 0 and old_modifier or 0
-        -- update the active modifier
-        inventory_slots.active_modifier = inventory_slots.research_modifier + inventory_slots.level_modifier
-
-        -- add the new active modifier to the non-buffed modifier
-        force.character_inventory_slots_bonus = old_modifier + inventory_slots.active_modifier
-    end
+    update_modifier{
+        buff = config.buffs['inventory_slot'],
+        force = force,
+        level_up = level_up,
+        modifier = inventory_slots,
+        property = 'character_inventory_slots_bonus',
+    }
 end
 
 ---Updates a forces health bonus. By removing active modifiers and re-adding
 ---@param force LuaForce the force of which will be updated
 ---@param level_up? number a level if updating as part of a level up
 Public.update_health_bonus = function(force, level_up)
-    local buff = config.buffs['health_bonus']
-    if buff.max == nil or force.character_health_bonus < buff.max then
-        level_up = level_up ~= nil and level_up or 0
-        if level_up > 0 and buff ~= nil then
-            local value = (buff.double_level ~= nil and level_up % buff.double_level == 0) and buff.value * 2 or buff.value
-            health_bonus.level_modifier = health_bonus.level_modifier + value
-        end
-
-        -- remove the current buff
-        local old_modifier = force.character_health_bonus - health_bonus.active_modifier
-        old_modifier = old_modifier >= 0 and old_modifier or 0
-        -- update the active modifier
-        health_bonus.active_modifier = health_bonus.research_modifier + health_bonus.level_modifier
-
-        -- add the new active modifier to the non-buffed modifier
-        force.character_health_bonus = old_modifier + health_bonus.active_modifier
-    end
+    update_modifier{
+        buff = config.buffs['health_bonus'],
+        force = force,
+        level_up = level_up,
+        modifier = health_bonus,
+        property = 'character_health_bonus',
+    }
 end
 
 -- ============================================================================

@@ -500,10 +500,10 @@ storage.config = {
         },
         buffs = {
             -- define new buffs here, they are handed out for each level
-            mining_speed = { value = 5, max = 10 },
-            inventory_slot = { value = 1, max = 100 },
             -- double_level is the level interval for receiving a double bonus (Diggy default: 5 which equals every 5th level)
-            health_bonus = { value = 2.5, double_level = 5, max = 500 }
+            mining_speed = { value = 5, max = 20 },
+            inventory_slot = { value = 1, max = 100 },
+            health_bonus = { value = 2.5, double_level = 5, max = 500 },
         },
         -- add or remove a table entry to add or remove an unlockable item from the market.
         unlockables = {
