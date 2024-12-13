@@ -12,6 +12,7 @@ local Global = require 'utils.global'
 local Gui = require 'utils.gui'
 local math = require 'utils.math'
 local Retailer = require 'features.retailer'
+local RS = require 'map_gen.shared.redmew_surface'
 local ScoreTracker = require 'utils.score_tracker'
 local Toast = require 'features.gui.toast'
 local Utils = require 'utils.core'
@@ -406,7 +407,7 @@ local function on_research_finished(event)
         exp = award_xp * research.research_unit_count
     end
     local text = { '', '[img=item/automation-science-pack] ', { 'experience.float_xp_gained_research', exp } }
-    Game.create_local_flying_text { text = text, color = gain_xp_color, create_at_cursor = true }
+    Game.create_local_flying_text { surface = RS.get_surface_name(), text = text, color = gain_xp_color, create_at_cursor = true }
     add_experience(force, exp)
 
     local current_modifier = mining_efficiency.research_modifier
@@ -428,10 +429,11 @@ end
 ---Awards experience when a rocket has been launched based on percentage of total experience
 local function on_rocket_launched(event)
     local force = event.rocket.force
+    local silo_surface = event.rocket_silo and event.rocket_silo.surface
 
     local exp = add_experience_percentage(force, config.XP['rocket_launch'], nil, config.XP['rocket_launch_max'])
     local text = { '', '[img=item/satellite] ', { 'experience.float_xp_gained_rocket', exp } }
-    Game.create_local_flying_text { text = text, color = gain_xp_color, create_at_cursor = true }
+    Game.create_local_flying_text { surface = silo_surface and silo_surface.index, text = text, color = gain_xp_color, create_at_cursor = true }
 end
 
 ---Awards experience when a player kills an enemy, based on type of enemy
