@@ -14,6 +14,7 @@ local math = require 'utils.math'
 local Retailer = require 'features.retailer'
 local RS = require 'map_gen.shared.redmew_surface'
 local ScoreTracker = require 'utils.score_tracker'
+local Settings = require 'utils.redmew_settings'
 local Toast = require 'features.gui.toast'
 local Utils = require 'utils.core'
 
@@ -136,8 +137,12 @@ local function play_level_up_sound(force)
     if force_sounds[force.index] and game.tick < force_sounds[force.index] then
         return
     end
-    force.play_sound(config.sound)
     force_sounds[force.index] = game.tick + (config.sound.duration or 20 * 60)
+    for _, player in pairs(force.connected_players) do
+        if Settings.get(player.index, 'notify_task') then
+            player.play_sound(config.sound)
+        end
+    end
 end
 
 ---@param parent LuaGuiElement
