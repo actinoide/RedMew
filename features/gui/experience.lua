@@ -56,7 +56,8 @@ Global.register(
         inventory_slots = inventory_slots,
         health_bonus = health_bonus,
         force_sounds = force_sounds,
-        gui_toggled = gui_toggled
+        gui_toggled = gui_toggled,
+        level_table = level_table
     },
     function(tbl)
         mining_efficiency = tbl.mining_efficiency
@@ -64,10 +65,11 @@ Global.register(
         health_bonus = tbl.health_bonus
         force_sounds = tbl.force_sounds
         gui_toggled = tbl.gui_toggled
+        level_table = tbl.level_table
     end
 )
 
-ScoreTracker.register(experience_lost_name, { 'experience.score_experience_lost' }, '[img=recipe.artillery-targeting-remote]')
+ScoreTracker.register(experience_lost_name, { 'experience.score_experience_lost' }, '[img=item.artillery-targeting-remote]')
 
 local global_to_show = storage.config.score.global_to_show
 global_to_show[#global_to_show + 1] = experience_lost_name
