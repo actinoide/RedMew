@@ -55,7 +55,7 @@ local config = {
         },
         -- controls the introduction cutscene
         cutscene = {
-            enabled =  true,
+            enabled = false,
             load = function() return require('map_gen.maps.diggy.feature.cutscene') end
         },
         -- core feature
