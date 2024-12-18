@@ -6,6 +6,8 @@ local pairs = pairs
 local type = type
 
 local restart_command = require 'map_gen.maps.diggy.feature.restart_command'
+local AutoStash = require 'features.auto_stash'
+AutoStash.insert_into_furnace(true)
 
 require 'utils.table'
 require 'utils.core'
@@ -55,6 +57,9 @@ function Scenario.register(diggy_config)
     redmew_config.hodor.enabled = false
     redmew_config.paint.enabled = false
     redmew_config.experience.enabled = true
+    redmew_config.experience.sound.path = 'diggy-diggy-chorus'
+    redmew_config.experience.sound.duration = 5 * 60 * 60
+    redmew_config.player_shortcuts.enabled = true
 
     restart_command({scenario_name = diggy_config.scenario_name})
 
