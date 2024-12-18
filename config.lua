@@ -569,6 +569,7 @@ storage.config = {
         sound = {
             path = nil,
             duration = 60 * 60,
+            override_sound_type = 'ambient' -- Menu > Settings > Sounds > Music
         }
     },
 }
