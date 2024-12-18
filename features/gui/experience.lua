@@ -36,6 +36,7 @@ local round_sig = math.round_sig
 local gain_xp_color = Color.light_sky_blue
 local lose_xp_color = Color.red
 
+local notify_name = 'notify_experience_level_up'
 local experience_lost_name = 'experience-lost'
 local on_bonuses, off_bonuses = '▼  Bonuses', '▲  Bonuses'
 local on_rewards, off_rewards = '▼  Rewards', '▲  Rewards'
@@ -69,6 +70,7 @@ Global.register(
     end
 )
 
+Settings.register(notify_name, Settings.types.boolean, true, 'experience.notify_caption_short')
 ScoreTracker.register(experience_lost_name, { 'experience.score_experience_lost' }, '[img=item.artillery-targeting-remote]')
 
 local global_to_show = storage.config.score.global_to_show
@@ -141,7 +143,7 @@ local function play_level_up_sound(force)
     end
     force_sounds[force.index] = game.tick + (config.sound.duration or 20 * 60)
     for _, player in pairs(force.connected_players) do
-        if Settings.get(player.index, 'notify_task') then
+        if Settings.get(player.index, notify_name) then
             player.play_sound(config.sound)
         end
     end
